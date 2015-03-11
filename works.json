@@ -1,0 +1,141 @@
+{ 
+	"works" : [
+	{
+		"name" : "sampleo",
+		"title" : "Sampleo",
+		"description" : "Developement of the responsive version of sampleo.com",
+		"technologies" : "HTML5, CSS3, jQuery, Symfony2",
+		"date" : "From july to august 2014",
+		"context" : "Rapeller objet du stie, client, contexte., ton rôle...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed elementum mauris. Vivamus ultrices lorem quis massa vehicula, aliquam ullamcorper nulla iaculis. Duis quam metus, pharetra a feugiat a, ultrices id leo. Mauris sit amet justo eu magna ultrices venenatis in vel purus. Fusce at bibendum justo, eget vulputate lorem. Nulla nec mollis enim, eget ultrices orci. Suspendisse dui ligula, feugiat vehicula ipsum sit amet, tincidunt consectetur purus. Nullam volutpat luctus massa, bibendum euismod justo imperdiet sed. Nunc a erat imperdiet, congue est ut, finibus nisl.",
+		"gallery" : [
+			{
+				"title" : "Page d'accueil",
+				"url" : "sampleo_1"
+			},			
+			{
+				"title" : "Page d'un produit",
+				"url" : "sampleo_2"
+			},			
+			{
+				"title" : "Page d'artiste",
+				"url" : "sampleo_3"
+			},			
+			{
+				"title" : "Page d'artiste",
+				"url" : "sampleo_4"
+			}
+
+		]
+	},
+	{
+		"name" : "geofarming",
+		"title" : "Geofarming",
+		"description" : "Developement of the responsive version of sampleo.com",
+		"technologies" : "AngularJS, HTML5, CSS3",
+		"date" : "From july to august 2014",
+		"context" : "Rapeller objet du stie, client, contexte., ton rôle...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed elementum mauris. Vivamus ultrices lorem quis massa vehicula, aliquam ullamcorper nulla iaculis. Duis quam metus, pharetra a feugiat a, ultrices id leo. Mauris sit amet justo eu magna ultrices venenatis in vel purus. Fusce at bibendum justo, eget vulputate lorem. Nulla nec mollis enim, eget ultrices orci. Suspendisse dui ligula, feugiat vehicula ipsum sit amet, tincidunt consectetur purus. Nullam volutpat luctus massa, bibendum euismod justo imperdiet sed. Nunc a erat imperdiet, congue est ut, finibus nisl.",
+		"gallery" : [
+			{
+				"title" : "Page d'accueil",
+				"url" : "sampleo_1"
+			},			
+			{
+				"title" : "Page d'un produit",
+				"url" : "sampleo_2"
+			},			
+			{
+				"title" : "Page d'artiste",
+				"url" : "sampleo_3"
+			},			
+			{
+				"title" : "Page d'artiste",
+				"url" : "sampleo_4"
+			}
+
+		]
+	},
+	{
+		"name" : "find-it-out",
+		"title" : "Find-it-out",
+		"description" : "Developement of the responsive version",
+		"technologies" : "HTML5, CSS3, jQuery, Symfony2",
+		"date" : "From july to august 2014",
+		"context" : "Rapeller objet du stie, client, contexte., ton rôle...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed elementum mauris. Vivamus ultrices lorem quis massa vehicula, aliquam ullamcorper nulla iaculis. Duis quam metus, pharetra a feugiat a, ultrices id leo. Mauris sit amet justo eu magna ultrices venenatis in vel purus. Fusce at bibendum justo, eget vulputate lorem. Nulla nec mollis enim, eget ultrices orci. Suspendisse dui ligula, feugiat vehicula ipsum sit amet, tincidunt consectetur purus. Nullam volutpat luctus massa, bibendum euismod justo imperdiet sed. Nunc a erat imperdiet, congue est ut, finibus nisl.",
+		"gallery" : [
+			{
+				"title" : "Page d'accueil",
+				"url" : "sampleo_1"
+			},			
+			{
+				"title" : "Page d'un produit",
+				"url" : "sampleo_2"
+			},			
+			{
+				"title" : "Page d'artiste",
+				"url" : "sampleo_3"
+			},			
+			{
+				"title" : "Page d'artiste",
+				"url" : "sampleo_4"
+			}
+
+		]
+	},
+
+	{
+		"name" : "cafe-culturel",
+		"title" : "Café Culturel",
+		"description" : "Developement of the responsive version",
+		"technologies" : "HTML5, CSS3, jQuery, Symfony2",
+		"date" : "From july to august 2014",
+		"context" : "Rapeller objet du stie, client, contexte., ton rôle...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed elementum mauris. Vivamus ultrices lorem quis massa vehicula, aliquam ullamcorper nulla iaculis. Duis quam metus, pharetra a feugiat a, ultrices id leo. Mauris sit amet justo eu magna ultrices venenatis in vel purus. Fusce at bibendum justo, eget vulputate lorem. Nulla nec mollis enim, eget ultrices orci. Suspendisse dui ligula, feugiat vehicula ipsum sit amet, tincidunt consectetur purus. Nullam volutpat luctus massa, bibendum euismod justo imperdiet sed. Nunc a erat imperdiet, congue est ut, finibus nisl.",
+		"gallery" : [
+			{
+				"title" : "poskfpoesg",
+				"url" : "sampleo_1"
+			},			
+			{
+				"title" : "l;pokopok",
+				"url" : "sampleo_2"
+			},			
+			{
+				"title" : "nkioin",
+				"url" : "sampleo_3"
+			},			
+			{
+				"title" : "Page d'artiste",
+				"url" : "sampleo_4"
+			}
+
+		]
+	},
+
+	{
+		"name" : "dear-boutique",
+		"title" : "Dear Boutique",
+		"description" : "Developement of the responsive version",
+		"technologies" : "HTML5, CSS3, jQuery, Symfony2",
+		"date" : "From july to august 2014",
+		"context" : "Rapeller objet du stie, client, contexte., ton rôle...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed elementum mauris. Vivamus ultrices lorem quis massa vehicula, aliquam ullamcorper nulla iaculis. Duis quam metus, pharetra a feugiat a, ultrices id leo. Mauris sit amet justo eu magna ultrices venenatis in vel purus. Fusce at bibendum justo, eget vulputate lorem. Nulla nec mollis enim, eget ultrices orci. Suspendisse dui ligula, feugiat vehicula ipsum sit amet, tincidunt consectetur purus. Nullam volutpat luctus massa, bibendum euismod justo imperdiet sed. Nunc a erat imperdiet, congue est ut, finibus nisl.",
+		"gallery" : [
+			{
+				"title" : "poskfpoesg",
+				"url" : "sampleo_1"
+			},			
+			{
+				"title" : "l;pokopok",
+				"url" : "sampleo_2"
+			},			
+			{
+				"title" : "nkioin",
+				"url" : "sampleo_3"
+			},			
+			{
+				"title" : "Page d'artiste",
+				"url" : "sampleo_4"
+			}
+
+		]
+	}
+	
+]}
