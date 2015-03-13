@@ -47,9 +47,7 @@ Portfolio = {
     		loadedImages++;
 
     		// CREER OBJET PROGRESSBAR
-    		$('#progress-bar')
-			.velocity('stop')
-    		.velocity(
+/*    		$('#progress-bar').velocity(
 				{'width' : (loadedImages/countedImages)*100 + '%'}, 
 				200, "ease", 
 				function(){
@@ -68,6 +66,25 @@ Portfolio = {
 					}
 				}
 			);
+*/
+			/* ANIMATE */
+
+			$('#progress-bar').animate(
+				{"width" : (loadedImages/countedImages)*100 + '%'},
+				{duration : 500, complete: function(){
+					if(loadedImages == countedImages){
+						$( this ).delay(500).animate(
+							{'top' : '-10px'},
+							{ 	
+								complete:function(){
+									$(this).css("display","none");
+									that.showIntro();
+								}
+							}
+						);
+					}
+				}}
+			); 
 
 		});
 	},
@@ -76,7 +93,7 @@ Portfolio = {
 
 		var introLeftPosition = ($window.width() - $intro.width())/2;
 
-		$intro.css("left", introLeftPosition+"px").velocity({opacity: 1}, 500, function(){
+		$intro.css("left", introLeftPosition+"px").animate({opacity: 1}, 500, function(){
 			$(this).on('click', '#enter-portfolio', that.enterPortfolio);
 		});
 	},
@@ -85,9 +102,9 @@ Portfolio = {
 
 		that.currentPage = "about";
 
-		$intro.velocity(
+		$intro.animate(
 			{ opacity:0, top: "-=100"  },
-			{ duration:300, easing:"easeInOutBack", complete: function(){
+			{ duration:300, /*easing:"easeInOutBack", */complete: function(){
 
 					$intro.remove();
 
@@ -95,10 +112,16 @@ Portfolio = {
 						
 						$header.find("nav ul li:first a").addClass("blue-light");
 						
-						$header.css("display", "block").velocity({"top":0}, 200, "ease");
+						$header.css("display", "block").animate({"top":0}, 200, "linear");
 						
-						$("#about").css("display", "block").velocity({opacity:1}, {duration:500, delay:100, complete: that.addClickListenerOnLink()
-						});
+						$("#about")
+						.css("display", "block")
+						.delay(100)
+						.animate(
+							{opacity:1}, 
+							{duration:500, /*delay:100,*/  
+							complete: function(){that.addClickListenerOnLink();}}
+						);
 
 					}, 1000);
 				}
@@ -114,6 +137,7 @@ Portfolio = {
 		$('body').on('click', 'a', function(e){
 			
 			e.preventDefault();
+
 
 			/*($(this).attr("href") && that.scrollTo($(this).attr("href")))
 			||
@@ -135,13 +159,11 @@ Portfolio = {
 				var link = $(this).attr("href");
 
 				if(link.indexOf('#') > -1){
-					console.log("# :"+ link);
 					that.scrollTo(link);
 				}else{
 					link = link.split("/");
 					id = link[1];
-					console.log("show work :"+ id);
-					that.works[id].hidePageWorks();
+					that.works[id].showWork();
 				}
 
 			}
@@ -151,16 +173,21 @@ Portfolio = {
 
 	hideCurrentPage : function(newPage){
 
+		$header.find("nav a").each(function(){
+			$(this).data("page") == newPage ? $(this).addClass("blue-light") : $(this).removeClass("blue-light");
+		});
+
 		$("#"+that.currentPage)
-		.velocity(
-			{ scale : 0.95, opacity : 0 }, 
+		.animate(
+			{ /*scale : 0.95, */opacity : 0 }, 
 			{ 
 				duration : 300,  
-				easing : "easeInOutBack", 
+				// easing : "easeInOutBack", 
 				complete: function(){
-					$(this).css({"display": "none"}).velocity({scale :1 });
+					$(this).css({"display": "none"});/*.animate({scale :1 }, function(){*/
+						that.showPage(newPage);
+					// });
 					// $header.velocity({"top": -$header.outerHeight() }, 300, "linear");
-					that.showPage(newPage);
 				}
 			}
 		);
@@ -169,13 +196,7 @@ Portfolio = {
 
 	showPage : function(page){
 
-		$header.find("nav a").each(function(){
-			$(this).data("page") == page ? $(this).addClass("blue-light") : $(this).removeClass("blue-light");
-		});
-
-		$("#"+page).css("display", "block").velocity({opacity:1}, {duration:300, delay:200});
-
-		that.currentPage = page;
+		$("#"+page).css("display", "block").delay(200).animate({opacity:1}, {duration:300, /*delay:200,*/ complete:function(){that.currentPage = page}});
 			
 	},
 
@@ -198,17 +219,19 @@ var Work = function(i , work){
 	this.date = work.date,
 	this.context = work.context,
 	this.gallery = work.gallery;
-	this.countedImages = work.gallery.length;
-	this.loadedImages = 0;
+/*	this.countedImages = work.gallery.length;*/
+/*	this.loadedImages = 0;
+*/	this.allImagesLoaded = false;
 	
 	this.init = function(){
 
 		var self = this;
 		// Ajout du projet dans le DOM (page works)
 
-		$('<img src="assets/img/'+ self.name+'/'+self.name+'.jpg">').load(function(){
+		$('<img alt="'+self.title+'" src="assets/img/'+ self.name+'/'+self.name+'.jpg">').load(function(){
 			// console.log(self, this);
 			// Création du lien vers le projet
+			// 			
 			var $work = $('<a class="work" href="works/'+ self.id +'"><div><span class="title">'+ self.title +'</span></div></a>');
 			// Ajout de l'image dans le lien
 			$work.find("div").before($(this));
@@ -217,20 +240,22 @@ var Work = function(i , work){
 		});
 	},
 
-	this.hidePageWorks = function(){
+	this.showWork = function(){
 
 		var self = this;
+		console.log(self);
 
 		// Désactivation des clics sur les thumbnails
-		$("#works .work").off("click");
+		// $("#works .work").off("click");
 
 		// Scroll en haut de la page
 		Portfolio.scrollTo("body", 200);
 
 	 	// si la page "single-work" est déjà ouverte, on la fait disparaitre
 	 	if($("#single-work").css("display")!="none"){
-	 		$("#single-work").velocity({"scale":0.95, "opacity":0}, 300, "ease", function(){
-		 			$(this).velocity({"scale":1});
+	 		$("#single-work").animate({/*"scale":0.95, */"opacity":0}, 300, /*"ease",*/ function(){
+		 			// $(this).animate({"scale":1});
+					console.log(self);
 		 			self.preparePageSingleWork();
 	 			}
 	 		);
@@ -272,120 +297,135 @@ var Work = function(i , work){
 		// $(page+" #next-work").data("id", nextWork.id);
 		$(page+" #next-work").attr("href", "works/"+nextWork.id);
 
-			
-		$("#wrapper-pictures").empty();
-
-
 		// init progress-bar
+
+		loaderProjectImages.init(self);
+
+	}
+
+};
+
+var loaderProjectImages = {
+
+	project : {},
+	countedImages: 0,
+	loadedImages : 0,
+	allImagesAlreadyLoaded : false,
+
+	init : function(project){
+
+		this.project = project;
+		var images = project.gallery;
+		this.countedImages = project.gallery.length;
+		this.loadedImages = 0;
+		this.allImagesAlreadyLoaded = project.allImagesLoaded;
+
+		self = this;
+
+		$("#wrapper-pictures").empty();
 		$("#progress-bar").css({"display": "block", "top":"0", "width":"0"});
 
-		var gallery = self.gallery; 
-		
-		for(var i in gallery){
+		for(var i in images){
 
-			var imageTitle, imageUrl;
-
-			var imageTitle = gallery[i].title;
-			var imageUrl = gallery[i].url;
+			var title = images[i].title;
+			var url = "assets/img/"+project.name+"/"+images[i].url+".jpg";
 
 			var image = new Image();
 
-			$(image).attr({src:"assets/img/"+self.name+"/"+imageUrl+".jpg", alt: imageTitle});
+			$(image).attr({src:url, alt: title});
 
 			if (image.complete || image.readyState === 4) {
-				self.addImage(image,imageTitle, imageUrl);
+				self.addImage(title, url);
 			}else{
-				$(image).one("load", self.addImage(image, imageTitle, imageUrl));
+				$(image).one("load", self.addImage(title, url));
+			}
+		}
+	}, 
+
+	addImage : function(title, url){
+
+		var $wrapperImage = $("<div class='picture' data-sr='enter top over 1s'><h3>"+title+"</h3><img src='"+url+"' alt='"+title+"'></div>");
+
+		$wrapperImage.appendTo($("#wrapper-pictures"));
+
+		self.loadedImages++;
+
+		if(!(self.allImagesAlreadyLoaded)){
+			if(self.loadedImages <= self.countedImages){
+				self.updateProgressBar();
+			}
+		}else{
+			if(self.loadedImages == self.countedImages){
+				self.showPageSingleWork();
 			}
 		}
 
 	},
 
-	this.addImage = function(image, title, url){
+	updateProgressBar : function(){
 
-		var self = this;
+		var loadedImages = self.loadedImages, 
+		countedImages = self.countedImages;
 
-		console.log(image);
-
-		// var $title = $('<h3>'+title+'</h3>');
-
-		var $wrapperImage = $("<div class='picture' data-sr='enter top over 1s'><h3>"+title+"</h3><img src='assets/img/"+self.name+"/"+url+".jpg' alt='"+title+"</div>");
-
-		$wrapperImage.appendTo($("#wrapper-pictures"));
-
-		console.log(self.loadedImages);
-
-		// Si les images ne sont pas déjà chargées
-		if(self.loadedImages != self.countedImages){
-			self.loadedImages++;
-			$('#progress-bar')
-			// .velocity('stop')
-			.velocity({'width' : (self.loadedImages/self.countedImages)*100 + '%'}, 200, "ease", function(){
-				console.log(self.loadedImages, self.countedImages);
-				if(self.loadedImages == self.countedImages){
-
-					$(this).velocity(
+		$('#progress-bar')
+			// .stop()
+			.animate(
+				{'width' : (loadedImages/countedImages)*100 + '%'}, 
+				200, 
+				/*"ease", */
+				function(){
+				console.log(loadedImages, countedImages);
+				if(loadedImages == countedImages){
+					Portfolio.works[self.project.id].allImagesLoaded = true;
+					$(this).animate(
 						{'top' : '-10px'}, 
 						{ 	
 							complete:function(){
-								self.showWork();
+								self.showPageSingleWork();
 							}
 						}
 					);
 				}	
+
 			});
-		}else{
-			self.showWork();
-		}
 	},
 
-	this.showWork = function(){
+	showPageSingleWork : function(){
 
-		var self = this;
+		$("header").animate({"opacity":"0"});
 
-		$("header").velocity({"opacity":"0"});
+		$("#works").animate({"opacity":"0"}, 400);
 
-		$("#works").velocity({"opacity":"0"}, function(){
+		var $singleWorks = document.querySelector("#single-work");
+		$singleWorks.style.display = "block";
+		$singleWorks.style.opacity = 1;
 
-			$(this).css("display", "none");			
-			$("#single-work").css("display", "block").velocity({"scale":1}, 0).velocity({"opacity":"1"},300);
-
-			// that.currentPage = "works/"+name;
-		});
+		/*$("#single-work").css({"display" : "block"})
+		.delay(100)
+		.animate(
+			{"opacity":1}, 
+			{ duration: 400 }
+		);*/
 
 		$("#cross").on('click', function(){
 			self.closeWork();		
 		});
 
+		$(document).keyup(function(e){
+			if (e.keyCode == 27) { self.closeWork(); }  
+		});
 	},
 
-	this.closeWork = function(){
-		$("header").velocity({"opacity":"1"});
-		$("#single-work").velocity({"scale":0.98, "opacity":0}, 300, "ease", function(){
-				$(this).css("display", "none").velocity({"scale":1});
-				$("#works").css("display", "block").velocity({"opacity":"1"}, {duration:300, delay:100});
-				$("#works .work").on("click");
-			}
-		);
+	closeWork : function(){
+		$("#single-work").animate({/*"scale":0.98,*/ "opacity":0}, 400, /*"ease",*/ function(){
+				$(this).css("display", "none");/*.animate({"scale":1})*/
+				$("header").animate({"opacity":"1"}, 300);
+				$("#works").animate({"opacity":"1"}, 300);
+		});
+
+
+
 	}
-};
-
-function updateUrl(page){
-
-	var currentUrl = window.location.href;
-
-	console.log(currentUrl.indexOf("/"));
-
-	// // Cas 1 : on est sur la intro page
-	// if(currentUrl.indexOf("/") == 0){
-	// 	window.location.href += page;
-	// }
-	// // Cas 2 : on est sur la page "about", "works" ou "contact"
-	// else{
-	// 	window.location.href = rootUrl +"/"+ page;
-	// }
-
-
 }
 
 

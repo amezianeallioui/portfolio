@@ -9,19 +9,19 @@
 		"context" : "Rapeller objet du stie, client, contexte., ton rôle...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed elementum mauris. Vivamus ultrices lorem quis massa vehicula, aliquam ullamcorper nulla iaculis. Duis quam metus, pharetra a feugiat a, ultrices id leo. Mauris sit amet justo eu magna ultrices venenatis in vel purus. Fusce at bibendum justo, eget vulputate lorem. Nulla nec mollis enim, eget ultrices orci. Suspendisse dui ligula, feugiat vehicula ipsum sit amet, tincidunt consectetur purus. Nullam volutpat luctus massa, bibendum euismod justo imperdiet sed. Nunc a erat imperdiet, congue est ut, finibus nisl.",
 		"gallery" : [
 			{
-				"title" : "Page d'accueil",
+				"title" : "Page daccueil 1",
 				"url" : "sampleo_1"
 			},			
 			{
-				"title" : "Page d'un produit",
+				"title" : "Page dun produit 1",
 				"url" : "sampleo_2"
 			},			
 			{
-				"title" : "Page d'artiste",
+				"title" : "Page d'artiste 1",
 				"url" : "sampleo_3"
 			},			
 			{
-				"title" : "Page d'artiste",
+				"title" : "Sfs fsf sffff",
 				"url" : "sampleo_4"
 			}
 
@@ -36,19 +36,19 @@
 		"context" : "Rapeller objet du stie, client, contexte., ton rôle...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed elementum mauris. Vivamus ultrices lorem quis massa vehicula, aliquam ullamcorper nulla iaculis. Duis quam metus, pharetra a feugiat a, ultrices id leo. Mauris sit amet justo eu magna ultrices venenatis in vel purus. Fusce at bibendum justo, eget vulputate lorem. Nulla nec mollis enim, eget ultrices orci. Suspendisse dui ligula, feugiat vehicula ipsum sit amet, tincidunt consectetur purus. Nullam volutpat luctus massa, bibendum euismod justo imperdiet sed. Nunc a erat imperdiet, congue est ut, finibus nisl.",
 		"gallery" : [
 			{
-				"title" : "Page d'accueil",
+				"title" : "Page d'accueil 2",
 				"url" : "sampleo_1"
 			},			
 			{
-				"title" : "Page d'un produit",
+				"title" : "Page d'un produit 2",
 				"url" : "sampleo_2"
 			},			
 			{
-				"title" : "Page d'artiste",
+				"title" : "Page d'artiste 2",
 				"url" : "sampleo_3"
 			},			
 			{
-				"title" : "Page d'artiste",
+				"title" : "Page d'un article 2",
 				"url" : "sampleo_4"
 			}
 
@@ -63,20 +63,24 @@
 		"context" : "Rapeller objet du stie, client, contexte., ton rôle...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed elementum mauris. Vivamus ultrices lorem quis massa vehicula, aliquam ullamcorper nulla iaculis. Duis quam metus, pharetra a feugiat a, ultrices id leo. Mauris sit amet justo eu magna ultrices venenatis in vel purus. Fusce at bibendum justo, eget vulputate lorem. Nulla nec mollis enim, eget ultrices orci. Suspendisse dui ligula, feugiat vehicula ipsum sit amet, tincidunt consectetur purus. Nullam volutpat luctus massa, bibendum euismod justo imperdiet sed. Nunc a erat imperdiet, congue est ut, finibus nisl.",
 		"gallery" : [
 			{
-				"title" : "Page d'accueil",
+				"title" : "Page d'accueil 3",
 				"url" : "sampleo_1"
 			},			
 			{
-				"title" : "Page d'un produit",
+				"title" : "Page d'un produit 3",
 				"url" : "sampleo_2"
 			},			
 			{
-				"title" : "Page d'artiste",
+				"title" : "Page d'artiste 3",
 				"url" : "sampleo_3"
 			},			
 			{
-				"title" : "Page d'artiste",
+				"title" : "Page des amoureux 3",
 				"url" : "sampleo_4"
+			},			
+			{
+				"title" : "Page d'un artiste 5",
+				"url" : "sampleo_5"
 			}
 
 		]
@@ -91,19 +95,19 @@
 		"context" : "Rapeller objet du stie, client, contexte., ton rôle...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed elementum mauris. Vivamus ultrices lorem quis massa vehicula, aliquam ullamcorper nulla iaculis. Duis quam metus, pharetra a feugiat a, ultrices id leo. Mauris sit amet justo eu magna ultrices venenatis in vel purus. Fusce at bibendum justo, eget vulputate lorem. Nulla nec mollis enim, eget ultrices orci. Suspendisse dui ligula, feugiat vehicula ipsum sit amet, tincidunt consectetur purus. Nullam volutpat luctus massa, bibendum euismod justo imperdiet sed. Nunc a erat imperdiet, congue est ut, finibus nisl.",
 		"gallery" : [
 			{
-				"title" : "poskfpoesg",
+				"title" : "Page d'un article 4",
 				"url" : "sampleo_1"
 			},			
 			{
-				"title" : "l;pokopok",
+				"title" : "Page d'un artiste 4",
 				"url" : "sampleo_2"
 			},			
 			{
-				"title" : "nkioin",
+				"title" : "Page d'un produit 4",
 				"url" : "sampleo_3"
 			},			
 			{
-				"title" : "Page d'artiste",
+				"title" : "Page d'un artiste 5",
 				"url" : "sampleo_4"
 			}
 
@@ -119,19 +123,19 @@
 		"context" : "Rapeller objet du stie, client, contexte., ton rôle...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed elementum mauris. Vivamus ultrices lorem quis massa vehicula, aliquam ullamcorper nulla iaculis. Duis quam metus, pharetra a feugiat a, ultrices id leo. Mauris sit amet justo eu magna ultrices venenatis in vel purus. Fusce at bibendum justo, eget vulputate lorem. Nulla nec mollis enim, eget ultrices orci. Suspendisse dui ligula, feugiat vehicula ipsum sit amet, tincidunt consectetur purus. Nullam volutpat luctus massa, bibendum euismod justo imperdiet sed. Nunc a erat imperdiet, congue est ut, finibus nisl.",
 		"gallery" : [
 			{
-				"title" : "poskfpoesg",
+				"title" : "Page d'un article 5",
 				"url" : "sampleo_1"
 			},			
 			{
-				"title" : "l;pokopok",
+				"title" : "Page d'un artiste 5",
 				"url" : "sampleo_2"
 			},			
 			{
-				"title" : "nkioin",
+				"title" : "Page d'un produit 5",
 				"url" : "sampleo_3"
 			},			
 			{
-				"title" : "Page d'artiste",
+				"title" : "Page d'un artiste 5",
 				"url" : "sampleo_4"
 			}
 
