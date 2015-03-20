@@ -25,11 +25,16 @@
 	});
 
 	$("#enter-portfolio").on('click', function(){
-			Portfolio.enterPortfolio();
-		});
+		Portfolio.enterPortfolio();
+	});
 			
 	$("#close-work").on('click', function(){
 		Portfolio.closeWork();
+	});
+
+	$("#toggle").on('click', function(){
+		$(this).toggleClass("on");
+		$("#navigation").slideToggle();
 	});
 
 	$('body').on('click', 'header a, #about a, #works a, #single-work a', function(e){
@@ -145,14 +150,19 @@
 		resizeContent : function(){
 
 			if($intro.length != 0){
-				var introLeftPosition = ($(window).width() - $intro.width())/2,
-					introTopPosition = ($(window).height() - $intro.height())/2;
-
-				$intro.css({"top": introTopPosition, "left": introLeftPosition}); 
+				var introTopPosition = ($(window).height() - $intro.height())/2;
+				$intro.css("top", introTopPosition); 
 			}
 
 			// Redimensionnement des container des miniatures des projets
 			$(".works .work").height($(".works .work").width());
+
+			if($(window).width()<=768){
+				$("#navigation").css("display", "none");
+			}else{
+				$("#navigation").css("display", "block");
+				$("#toggle").removeClass("on");
+			}
 		},
 
 		showIntro : function(){
@@ -172,7 +182,7 @@
 			self.currentPage = "about";
 
 			$intro.velocity(
-				{ opacity:0, marginTop: "-=10vh"  },
+				{ opacity:0, marginTop: "-=15vh"  },
 				{ duration:250, easing:"ease", complete: function(){
 
 						$intro.remove();
@@ -289,9 +299,10 @@
 
 			$(page+" #title").html(work.title);
 			$(page+" #description").html(work.description);
-			$(page+" #technologies span").html(work.technologies);
-			$(page+" #date span").html(work.date);
-			$(page+" #context").html(work.context);
+			$(page+" #role").html(work.role);
+			$(page+" #technologies").html(work.technologies);
+			$(page+" #date").html(work.date);
+			$(page+" #presentation").html(work.presentation);
 
 			var prevWork = (id == 0) ? works[works.length-1] : works[id-1];
 			$(page+" #previous-work .legend-array span").html(prevWork.title);
@@ -399,6 +410,8 @@
 			var self = this;
 			
 			$("#works").velocity({"opacity":"0"}, 300);
+			
+			window.scrollReveal.init(true); 
 
 			$("#single-work")
 			.css({"display" : "block"})
@@ -407,9 +420,6 @@
 				{ 
 					duration: 400, 
 					easing : "ease", 
-					complete : function(){ 
-						window.scrollReveal.init(true); 
-					}
 				}
 			);
 		
@@ -444,6 +454,7 @@
 		this.name = work.name;
 		this.title = work.title;
 		this.description = work.description;
+		this.presentation = work.presentation;
 		this.technologies = work.technologies;
 		this.date = work.date;
 		this.context = work.context;

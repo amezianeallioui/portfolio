@@ -198,6 +198,7 @@ margin-top: calc(50vh - 30px);
 	margin: 0 auto;
 	padding: 0 20px;
 	position: absolute;
+	width: 100%;
 }
 
 #introduction p{
@@ -306,7 +307,7 @@ header #name a{
 }
 
 header #navigation{
-	display: inline-table;
+	display: block;
 	float: right;
 	margin: 0;
  	padding: 0;
@@ -600,11 +601,10 @@ header #toggle{
 
 #information{
 	margin: 30px auto 0;
-	width: 85%;
 	text-align: center;
 }
 
-#context{
+#presentation{
 	max-width: 570px;
 	text-align: justify;
 	margin: 50px auto 0;
@@ -634,10 +634,7 @@ header #toggle{
 }
 
 .picture h5{
-	/*font-size: .9em;
-	text-align: center;
-	display: block;*/
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 .picture img{
@@ -924,60 +921,89 @@ header #toggle{
  		padding: 15px 30px;
  	}
 
+ 	header #name{
+ 		margin-top: 6px;
+ 	}
+
  	header #name a{
  		color: #fff;
  	}
 
- 	header #navigation{
- 		display: none;
- 	}
+ 	header #toggle {
+	  display: block;
+	  width: 28px;
+	  height: 30px;
+	  margin: 0;
+	  padding: 0;
+	  -webkit-appearance: none;
+	  border: 0;
+	  background: none;
+	  float: right;
+	  cursor: pointer;
+	}
 
- 	#toggle{
- 		display: block;
-		width: 28px;
-		height: 30px;
-		margin: 30px auto 10px;
- 	}
-
-	#toggle span:after,
-	#toggle span:before {
+	header #toggle span:after,
+	header #toggle span:before {
 	  content: "";
 	  position: absolute;
 	  left: 0;
 	  top: -9px;
 	}
-	#toggle span:after{
+	header #toggle span:after{
 	  top: 9px;
 	}
-	#toggle span {
+	header #toggle span {
 	  position: relative;
 	  display: block;
 	}
 
-	#toggle span,
-	#toggle span:after,
-	#toggle span:before {
+	header #toggle span,
+	header #toggle span:after,
+	header #toggle span:before {
 	  width: 100%;
 	  height: 5px;
-	  background-color: #888;
+	  background-color: #fff;
 	  transition: all 0.3s;
 	  backface-visibility: hidden;
 	  border-radius: 2px;
 	}
 
 	/* on activation */
-	#toggle.on span {
+	header #toggle.on span {
 	  background-color: transparent;
 	}
-	#toggle.on span:before {
+	header #toggle.on span:before {
 	  transform: rotate(45deg) translate(5px, 5px);
 	}
-	#toggle.on span:after {
+	header #toggle.on span:after {
 	  transform: rotate(-45deg) translate(7px, -8px);
 	}
-	#toggle.on + #menu {
-	  opacity: 1;
-	}
+
+ 	header #navigation{
+ 		display: none;
+		position: absolute;
+		right: 0;
+		top:60px;
+		background-color: #66cc99;
+		width: 100%;
+		-webkit-transition: top 0.4s ease;
+		-moz-transition: top 0.4s ease;
+		-ms-transition: top 0.4s ease;
+		-o-transition: top 0.4s ease;
+		transition: top 0.4s ease;
+		z-index: 9997;
+ 	}
+
+ 	header #navigation li{
+ 		display: block !important;
+	  	padding: 10px 15px;
+	  	text-align: center;
+	  	width: 100%;
+	  	margin: 0 !important;
+	  	border-top: solid 1px #fff;
+	 	height: 40px;
+ 	}
+
 
  	/*** Page works ***/ 
 
@@ -991,7 +1017,7 @@ header #toggle{
  		margin-top:15px;
  	}
 
-	#single-work #context{
+	#single-work #presentation{
 		max-width: 90%;
 	}
 
@@ -1028,7 +1054,7 @@ header #toggle{
 	#single-work .legend-mobile{
  		display: inline-block;
  		width: calc(100% - 36px);
- 		top: 10px;
+ 		top: 3px;
  		position: relative;
 	}
 
@@ -1092,10 +1118,6 @@ header #toggle{
 		font-size: 85%;
 	}
 
-	#introduction{
-		margin-top: 20vh;
-	}
-
 	.go-to{
  		margin-top: 40px;
  		font-size: 1.2em;
@@ -1126,7 +1148,7 @@ header #toggle{
 		margin-bottom: 10px;
 	}
 
-	#context{
+	#presentation{
 		margin-top: 30px;
 		font-size: 1em;
 	}
