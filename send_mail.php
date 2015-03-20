@@ -13,13 +13,11 @@ if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['message'])){
 	$headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
 	$headers .= "From: ".$email."". "\r\n";
 
-	// if(mail($to, $subject, $message, $headers )){
-	// 	$response = 'Your message has been sent successfully !';
-	// }else{
-	// 	$response = 'Your message hasn\'t been sent. Please verify that you have correctly fill the form.';
-	// }
-
-	$response = 'Your message has been sent successfully !';
+	if(mail($to, $subject, $message, $headers )){
+		$response = 'Your message has been sent successfully !';
+	}else{
+		$response = 'Your message hasn\'t been sent. Please verify that you have correctly fill the form.';
+	}
 
 }else{
 	$response = 'Your message hasn\'t been sent. Please verify that you have correctly fill the form.';

@@ -4,74 +4,123 @@
 	<meta charset="utf-8">
 	<meta name="description" content="">
 	<meta name="keywords" content="">
+	<meta name="viewport" content="width=device-width" />
 	<link rel="stylesheet" href="./assets/css/main.css">
+	<link rel="stylesheet" href="./assets/css/font-awesome.min.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Lato:100,200,300,400,600,700,800' rel='stylesheet' type='text/css'>
 	<title>Améziane Allioui's portfolio</title>
 	<!--[if lt IE 9]>
 		<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-	<!-- <style> [data-scroll-reveal] { visibility: hidden; } </style> -->
 </head>
 <body>
 
 	<div id="progress-bar-container">
 		<div id="progress-bar"></div>
-		<div id="progress-percentage"></div>
+	<!-- 	<div id="progress-percentage"></div> -->
+	</div>
+
+	<div id="introduction">
+		<p>
+			Hi ! I'm <span id="my-name" class="blue-light">Améziane Allioui</span>,
+			<br/>
+			a junior front-end developer living in Paris
+			<br/> 
+			and 4th year student at French school  <a id="hetic" href="http://www.hetic.net" target="_blank" class="green">Hetic</a>.
+			<br/>
+			Welcome to my portfolio !
+		</p>
+		<a id="enter-portfolio" class="go-to">
+			Take a look...
+			<i class="arrow-down" role="img" aria-label="See the porfolio"></i>
+		</a>
 	</div>
 
 	<header>
 		<h1 id="name">
-			<a data-page="about" class="blue-light" title="Go back to start">Améziane Allioui</a>
+			<a data-page="about" title="Go back to start">Améziane Allioui</a>
 		</h1>
-		<nav id="navigation">
-			<ul>
-				<li><a data-page="about">About</a></li>
-				<li><a data-page="works">My works</a></li>
-				<li><a data-page="contact">Contact</a></li>
-			</ul>
-		</nav>
+		<ul id="navigation" role="navigation">
+			<li><a data-page="about">About</a></li>
+			<li><a data-page="works">My works</a></li>
+			<li><a data-page="contact">Contact</a></li>
+		</ul>
+		<button id="toggle"></button>
 	</header>
 
-	<div id="introduction">
-		<p>
-			Hi ! I'm <span class="blue-light">Améziane Allioui</span>,<br/>
-			a junior front-end developer<br/>and student at <a href="http://www.hetic.net" target="_blank" class="green">Hetic</a>.
-			<br/>Welcome to my portfolio !
-		</p>
-		<a id="enter-portfolio" class="go-to">
-			Take a look...
-			<i class="icon-arrow-down" role="img" aria-label="See the porfolio"></i>
-		</a>
-	</div>
-
 	<section id="about">
-		<h1>Who am i ?</h1>
+		<h1 class="blue-light">Who am i ?</h1>
 		<div class="wrapper-text justify">
-			<p>I’m a 23 years old front-end developer, who’ve been studying for four years in the domain of web. Thanks to my different internships, I had the chance to be webdesigner, editorial webmaster and finally front-end developer. This allows me be always polyvalent and opened... </p>
-			<p>Today, my goal is to develop later accesible websites for people with disabilities. This is why I’m currently studying at the web school Hetic, in order to specialize myself in web developement and project management.</p>
+			<p>Hi ! I’m a 23 year old junior front-end developer, living in Paris. Thanks to my different internships, I had the chance to be webdesigner, editorial webmaster and finally front-end developer.</p>
+			<p>Today, my goal is to develop later accesible websites or launch my own accessibility project for people with disabilities. This is why I'm currently studying at the french web school Hetic, in order to specialize myself in web development and project management.</p>
 			<p>And last but not least, I’m currently looking for an internship from june to december, so feel free to take a look at my projects and to contact me for any proposition !</p>
-			<a data-page="works" class="go-to">
+			<a data-page="works" class="go-to blue-light">
 				Continue to my works
-				<span class="icon-arrow-down" role="img" aria-label="See my works"></span>
+				<span class="arrow-down" role="img" aria-label="See my works"></span>
 			</a>
 		</div>
 	</section>
 
 	<section id="works">
-		<h1>My works</h1>
+		<h1 class="blue-light">My works</h1>
 
 		<div id="wrapper-works">
 
 		</div>
 	</section>
 
-	
+	<section id="single-work">
+
+		<a id="close-work"></a>
+
+		<a class="navigation" id="previous-work">
+			<span id="array-left" class="array"></span>
+			<span class="legend-mobile">Previous work</span>
+			<p class="legend-array">Previous work :<br/>
+				<span class="blue-light"></span>
+			</p>
+		</a>
+
+		<a class="navigation"  id="next-work">
+			<span id="array-right" class="array"></span>
+			<span class="legend-mobile">Next work</span>
+			<p class="legend-array">Next work :<br/>
+				<span class="blue-light"></span>
+			</p>
+		</a>
+
+		<div id="wrapper-work">
+			<h3 id="title" class="blue-light"></h1>
+			<h4 id="description"></h2>
+			<div id="information">
+				<span id="technologies">Technologies : <span class="blue-light"></span></span> - <span id="date">Date : <span class="blue-light"></span></span>
+			</div>
+			<div id="context"></div>
+
+			<a id="scroll-to-pictures" class="go-to" href="#wrapper-pictures">
+				Scroll to see pictures of the project !
+				<span class="arrow-down" id="scroll-arrow"></span>
+			</a>
+
+			<div id="wrapper-pictures">
+
+			</div>
+
+			<a id="go-to-top" class="go-to" href="#wrapper-work">
+				<span id="go-to-top" ></span>
+				<span id="legend-go-to-top" >Go to top</span>
+			</a>
+		</div>
+	</section>
+
 	<section id="contact">
-		<h1>Contact me</h1>
+		<h1 class="blue-light">Contact me</h1>
 
 		<div class="wrapper-text center">
-			<p>Any question or project to discuss about with me ?<br/><br/> You can leave me a message using the form below, just be sure to indicate<br/>your name, your mail and of course your message !</p>
 
-			<p id="form-notif"></p>
+			<p>Any question or project to discuss about with me ?<br/><br/> Feel free to leave me a message using the form below, just be sure to indicate your name, your mail and of course your message !</p>
+
+			<div id="form-notif"></div>
 
 			<form id="form" method="post" action="send_mail.php" novalidate>
 				<label for="form-name">Name*</label>
@@ -85,60 +134,22 @@
 				<br/>
 				<input type="submit" value="SEND" />
 			</form>
+
+			<div id="external-links">
+				<a href="https://twitter.com/amezianeallioui" target="_blank"><i class="fa fa-3x fa-twitter" title="Follow me on Twitter !"></i></a>
+				<a href="https://www.linkedin.com/in/amezianeallioui" target="_blank" title="Go to my Linkedin profile"><i class="fa fa-3x fa-linkedin"></i></a>
+				<a href="mailto:ameziane.allioui@gmail.com" target="_blank" title="Send me a mail !"><i class="fa fa-3x fa-envelope"></i></a>
+			</div>
+
+			<a href="#" id="cv">Take a look at my CV</a>
+
 		</div>
-	</section>
 
-	<section id="single-work">
-
-		<i id="cross"></i>
-
-		<a class="navigation" id="previous-work">
-			<span id="array-left" class="array"></span>
-			<p class="legend-array">Previous work :<br/>
-				<span class="blue-light"></span>
-			</p>
-		</a>
-
-		<a class="navigation"  id="next-work">
-			<span id="array-right" class="array"></span>
-			<p class="legend-array">Next work :<br/>
-				<span class="blue-light"></span>
-			</p>
-		</a>
-
-		<div id="wrapper-work">
-			<h1 id="title"></h1>
-			<h2 id="description"></h2>
-			<div id="information">
-				<div id="technologies">
-					Technologies :<br/>
-					<span class="blue-light"></span>
-				</div>
-				<div id="date">Date :<br/>
-					<span class="blue-light"></span>
-				</div>
-			</div>
-			<div id="context"> 
-				
-			</div>
-
-			<a id="scroll-to-pictures" class="go-to" href="#wrapper-pictures">
-				Scroll to see pictures of the project !
-				<span class="icon-arrow-down" id="scroll-arrow"></span>
-			</a>
-
-			<div id="wrapper-pictures">
-
-			</div>
-
-			<a id="go-to-top" class="go-to" href="#wrapper-work">
-				<span id="icon-go-to-top" ></span>
-				<span id="legend-go-to-top" >Go to top</span>
-			</a>
-		</div>
 	</section>
 
 	<script type="text/javascript" src="./vendor/jquery-1.11.1.min.js"></script> 
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
 	<script type="text/javascript" src="./vendor/jquery.scrollTo.min.js"></script> 
 	<script src='./vendor/scrollReveal.min.js'></script>
 	<script type="text/javascript" src="./vendor/velocity.min.js"></script>

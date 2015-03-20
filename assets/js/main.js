@@ -1,523 +1,576 @@
-$window = $(window);
+(function($) {
 
-var configScrollreveal = {
-	mobile: false
-};
+	// 'use strict'
 
-$window.load(function(){
-	Portfolio.init();
-	window.scrollReveal = new scrollReveal(configScrollreveal);
-	scrollReveal.init();
-});
+	var configScrollreveal = {
+			mobile: false,
+			init: false
+		},
+		$loader = $("#loader"),
+		$header = $("header"),
+		headerHeight = $header.outerHeight();
+		$intro = $("#introduction"),
+		$about = $("#about"),
+		$works = $("#works"),
+		$contact = $("#contact")
+		containers = [$about, $works, $contact]; 
 
+	$.getJSON("works.json", function(result){
+		// Affichage des sites
+		Portfolio.init(result.works);
+	});
 
-/**** NAVIGATION GENERALE DANS LE PORTFOLIO ****/
+	$(window).resize(function(){
+		Portfolio.resizeContent();
+	});
 
-Portfolio = {
-
-	currentPage : "",
-	works : [],
-
-	init : function(){
-
-		that = this;
-
-		$loader = $("#loader");
-		$intro = $("#introduction");
-		$header = $("header");
-
-		// Chargement des travaux
-		$.getJSON("works.json", function(result){
-			// Affichage des sites
-			that.preloadSite(result.works);
-
+	$("#enter-portfolio").on('click', function(){
+			Portfolio.enterPortfolio();
 		});
+			
+	$("#close-work").on('click', function(){
+		Portfolio.closeWork();
+	});
 
-	},
+	$('body').on('click', 'header a, #about a, #works a, #single-work a', function(e){
+			
+		e.preventDefault();
+
+		if($(this).data("page")){
+			var link = $(this).data("page");
+			if(link != Portfolio.currentPage){
+				Portfolio.showPage(link);	
+			}
+		}else if($(this).attr("href")){
+
+			var link = $(this).attr("href");
+
+			if(link.indexOf('#') > -1){
+				Portfolio.scrollTo(link);
+			}else{
+				link = link.split("/");
+				var workId = link[1];
+				//si déjà chargé montrer pahge projet directement
+				Portfolio.showWork(workId);
+			}
+
+		}
+
+	});
+
+
+	$(function(){
+
+		$(window).trigger("resize");
+
+		window.scrollReveal = new scrollReveal(configScrollreveal);
 		
-	preloadSite : function(works){
+		Form.init();
 
-		var loadedImages = 0, countedImages = works.length;
+	});
 
-    	$.each(works, function(i, w){
+	var Portfolio = {
 
-    		that.works[i] = new Work(i,w);
-    		that.works[i].init();   		
+		currentPage : "",
+		works : [],
+		countedWorks : 0,
+		loadedWorks : 0,
 
-    		loadedImages++;
+		init : function(works){
 
-    		// CREER OBJET PROGRESSBAR
-/*    		$('#progress-bar').velocity(
-				{'width' : (loadedImages/countedImages)*100 + '%'}, 
-				200, "ease", 
-				function(){
-					// si toutes les images on été téléchargées, on fait disparaitre la progress bar
-					if(loadedImages == countedImages){
-						$("#progress-bar").velocity(
-							{'top' : '-10px'}, 
-							{ 	
-								delay:500, 
-								complete:function(){
-									$(this).css("display","none");
-									that.showIntro();
-								}
+			$header.css("top", -headerHeight);
+
+			$("section").css("padding-top", headerHeight);
+
+			var self = this;
+
+			self.countedWorks = works.length;
+
+	    	$.each(works, function(i, w){
+	 			self.works[i] = new Work(i, w);
+
+	 			if((i+1)==self.countedWorks){
+	 				self.loadProjectThumb(0);
+	 			}
+	    	});	
+
+	    },
+
+	    loadProjectThumb : function(i) {
+
+	    	var work = this.works[i],
+	    		self = this;
+
+	    	$('<img alt="'+work.title+'" src="assets/img/'+ work.name+'/thumb.jpg">').load(function(){
+
+
+				// Création du lien vers le projet
+			
+				var $workThumb = $('<a class="work" href="works/'+ work.id +'"><div><span class="title">'+ work.title +'</span></div></a>');
+				// Ajout de l'image dans le lien
+				$workThumb.find("div").before($(this));
+				// Ajout du lien dans la page "works"
+				$workThumb.appendTo("#wrapper-works");
+
+		    	self.loadedWorks++;
+
+	    		$('#progress-bar')
+	    		.velocity("stop")
+	    		.velocity(
+					{"width" : (self.loadedWorks/self.countedWorks)*100 + '%'},
+					{
+						duration : 200, 
+						easing:"easeInOutBack", 
+						complete: function(){
+							if(self.loadedWorks != self.countedWorks){
+								self.loadProjectThumb(i+1);
+							}else{
+								$(this).velocity(
+									{'top' : '-10px'},
+									{ 	
+										complete:function(){
+											$(this).css("display","none");
+											self.showIntro();
+										}
+									}
+								);
 							}
-						);
+						}
 					}
-				}
-			);
-*/
-			/* ANIMATE */
+				); 
 
-			$('#progress-bar').animate(
-				{"width" : (loadedImages/countedImages)*100 + '%'},
-				{duration : 500, complete: function(){
-					if(loadedImages == countedImages){
-						$( this ).delay(500).animate(
-							{'top' : '-10px'},
-							{ 	
-								complete:function(){
-									$(this).css("display","none");
-									that.showIntro();
-								}
-							}
-						);
-					}
-				}}
-			); 
+			});
+		},
 
-		});
-	},
+		resizeContent : function(){
 
-	showIntro : function(){
+			if($intro.length != 0){
+				var introLeftPosition = ($(window).width() - $intro.width())/2,
+					introTopPosition = ($(window).height() - $intro.height())/2;
 
-		var introLeftPosition = ($window.width() - $intro.width())/2;
+				$intro.css({"top": introTopPosition, "left": introLeftPosition}); 
+			}
 
-		$intro.css("left", introLeftPosition+"px").animate({opacity: 1}, 500, function(){
-			$(this).on('click', '#enter-portfolio', that.enterPortfolio);
-		});
-	},
+			// Redimensionnement des container des miniatures des projets
+			$(".works .work").height($(".works .work").width());
+		},
 
-	enterPortfolio : function(){
+		showIntro : function(){
 
-		that.currentPage = "about";
+			var self = this;
 
-		$intro.animate(
-			{ opacity:0, top: "-=100"  },
-			{ duration:300, /*easing:"easeInOutBack", */complete: function(){
+			$intro.velocity({opacity: 1}, 500, function(){
+				$(this).on('click', '#enter-portfolio', self.enterPortfolio);
+			});
+		},
 
-					$intro.remove();
+		enterPortfolio : function() {
 
-					setTimeout(function(){
+			/* this serait égal à l'élément sur lequel on a cliqué pour appeler cette fonction */ 
+			var self = Portfolio;
+
+			self.currentPage = "about";
+
+			$intro.velocity(
+				{ opacity:0, marginTop: "-=10vh"  },
+				{ duration:250, easing:"ease", complete: function(){
+
+						$intro.remove();
+							
+						$header.find("#navigation li:first").addClass("active");
 						
-						$header.find("nav ul li:first a").addClass("blue-light");
-						
-						$header.css("display", "block").animate({"top":0}, 200, "linear");
+						$header.css("display", "block").velocity({"top":0}, 200, "linear");
 						
 						$("#about")
 						.css("display", "block")
 						.delay(100)
-						.animate(
+						.velocity(
 							{opacity:1}, 
-							{duration:500, /*delay:100,*/  
-							complete: function(){that.addClickListenerOnLink();}}
+							{duration:500, delay:100 }
 						);
 
-					}, 1000);
+					}
 				}
-			}
-		);	
+			);	
 
-	},
+		},
 
-	addClickListenerOnLink : function(){
+		showPage : function(newPage){
 
-		// Bouton retour en haut sur page projet
+			var self = this;
 
-		$('body').on('click', 'a', function(e){
-			
-			e.preventDefault();
-
-
-			/*($(this).attr("href") && that.scrollTo($(this).attr("href")))
-			||
-			(($(this).data("page") && $(this).data("page")!=that.currentPage) && that.hideCurrentPage($(this).data("page")))
-			|| 
-			($(this).data("id") && that.works[$(this).data("id")].prepareWork());*/
-
-			// var link = $(this).data("page") ||;
-
-			if($(this).data("page")){
-
-				var link = $(this).data("page");
-				if(link != that.currentPage){
-					that.hideCurrentPage(link);	
-				}
-
-			}else if($(this).attr("href")){
-
-				var link = $(this).attr("href");
-
-				if(link.indexOf('#') > -1){
-					that.scrollTo(link);
-				}else{
-					link = link.split("/");
-					id = link[1];
-					that.works[id].showWork();
-				}
-
-			}
-			
-		});
-	},
-
-	hideCurrentPage : function(newPage){
-
-		$header.find("nav a").each(function(){
-			$(this).data("page") == newPage ? $(this).addClass("blue-light") : $(this).removeClass("blue-light");
-		});
-
-		$("#"+that.currentPage)
-		.animate(
-			{ /*scale : 0.95, */opacity : 0 }, 
-			{ 
-				duration : 300,  
-				// easing : "easeInOutBack", 
-				complete: function(){
-					$(this).css({"display": "none"});/*.animate({scale :1 }, function(){*/
-						that.showPage(newPage);
-					// });
-					// $header.velocity({"top": -$header.outerHeight() }, 300, "linear");
-				}
-			}
-		);
-
-	},
-
-	showPage : function(page){
-
-		$("#"+page).css("display", "block").delay(200).animate({opacity:1}, {duration:300, /*delay:200,*/ complete:function(){that.currentPage = page}});
-			
-	},
-
-	scrollTo : function(link, time){
-		var time = time || 750;
-		$('html, body').animate({ scrollTop: $(link).offset().top }, time, "linear");
-		return false;
-	}
-
-
-}
-
-var Work = function(i , work){
-
-	this.id = i,
-	this.name = work.name,
-	this.title = work.title,
-	this.description = work.description,
-	this.technologies = work.technologies,
-	this.date = work.date,
-	this.context = work.context,
-	this.gallery = work.gallery;
-/*	this.countedImages = work.gallery.length;*/
-/*	this.loadedImages = 0;
-*/	this.allImagesLoaded = false;
-	
-	this.init = function(){
-
-		var self = this;
-		// Ajout du projet dans le DOM (page works)
-
-		$('<img alt="'+self.title+'" src="assets/img/'+ self.name+'/'+self.name+'.jpg">').load(function(){
-			// console.log(self, this);
-			// Création du lien vers le projet
-			// 			
-			var $work = $('<a class="work" href="works/'+ self.id +'"><div><span class="title">'+ self.title +'</span></div></a>');
-			// Ajout de l'image dans le lien
-			$work.find("div").before($(this));
-			// Ajout du lien dans la page "works"
-			$work.appendTo("#wrapper-works");
-		});
-	},
-
-	this.showWork = function(){
-
-		var self = this;
-		console.log(self);
-
-		// Désactivation des clics sur les thumbnails
-		// $("#works .work").off("click");
-
-		// Scroll en haut de la page
-		Portfolio.scrollTo("body", 200);
-
-	 	// si la page "single-work" est déjà ouverte, on la fait disparaitre
-	 	if($("#single-work").css("display")!="none"){
-	 		$("#single-work").animate({/*"scale":0.95, */"opacity":0}, 300, /*"ease",*/ function(){
-		 			// $(this).animate({"scale":1});
-					console.log(self);
-		 			self.preparePageSingleWork();
-	 			}
-	 		);
-	 	}else{
-	 		self.preparePageSingleWork();
-	 	}
-
-	},
-
-	this.preparePageSingleWork = function(){
-
-		var self = this;
-
-		var page = "#single-work";
-
-	 	// Ajout des informations sur la page
-
-		$(page+" #title").html(self.title);
-		$(page+" #description").html(self.description);
-		$(page+" #technologies span").html(self.technologies);
-		$(page+" #date span").html(self.date);
-		$(page+" #context").html(self.context);
-
-		var id = self.id;
-		var works = Portfolio.works;
-
-		// précédent projet
-		// $(page+' #previous-work').attr('href','works/'+prevWork.name);
-		var prevWork = id == 0 ? works[works.length-1] : works[id-1];
-		// var prevWorkId = prevWork.id.toString();
-		$(page+" #previous-work .legend-array span").html(prevWork.title);
-		// $(page+" #previous-work").data("id", prevWork.id);
-		$(page+" #previous-work").attr("href", "works/"+prevWork.id);
-
-		// projet suivant
-		var nextWork = id+1 == works.length ? works[0] : works[id+1];
-		// var nextWorkId = nextWork.id.toString();
-		$(page+" #next-work .legend-array span").html(nextWork.title);
-		// $(page+" #next-work").data("id", nextWork.id);
-		$(page+" #next-work").attr("href", "works/"+nextWork.id);
-
-		// init progress-bar
-
-		loaderProjectImages.init(self);
-
-	}
-
-};
-
-var loaderProjectImages = {
-
-	project : {},
-	countedImages: 0,
-	loadedImages : 0,
-	allImagesAlreadyLoaded : false,
-
-	init : function(project){
-
-		this.project = project;
-		var images = project.gallery;
-		this.countedImages = project.gallery.length;
-		this.loadedImages = 0;
-		this.allImagesAlreadyLoaded = project.allImagesLoaded;
-
-		self = this;
-
-		$("#wrapper-pictures").empty();
-		$("#progress-bar").css({"display": "block", "top":"0", "width":"0"});
-
-		for(var i in images){
-
-			var title = images[i].title;
-			var url = "assets/img/"+project.name+"/"+images[i].url+".jpg";
-
-			var image = new Image();
-
-			$(image).attr({src:url, alt: title});
-
-			if (image.complete || image.readyState === 4) {
-				self.addImage(title, url);
-			}else{
-				$(image).one("load", self.addImage(title, url));
-			}
-		}
-	}, 
-
-	addImage : function(title, url){
-
-		var $wrapperImage = $("<div class='picture' data-sr='enter top over 1s'><h3>"+title+"</h3><img src='"+url+"' alt='"+title+"'></div>");
-
-		$wrapperImage.appendTo($("#wrapper-pictures"));
-
-		self.loadedImages++;
-
-		if(!(self.allImagesAlreadyLoaded)){
-			if(self.loadedImages <= self.countedImages){
-				self.updateProgressBar();
-			}
-		}else{
-			if(self.loadedImages == self.countedImages){
-				self.showPageSingleWork();
-			}
-		}
-
-	},
-
-	updateProgressBar : function(){
-
-		var loadedImages = self.loadedImages, 
-		countedImages = self.countedImages;
-
-		$('#progress-bar')
-			// .stop()
-			.animate(
-				{'width' : (loadedImages/countedImages)*100 + '%'}, 
-				200, 
-				/*"ease", */
-				function(){
-				console.log(loadedImages, countedImages);
-				if(loadedImages == countedImages){
-					Portfolio.works[self.project.id].allImagesLoaded = true;
-					$(this).animate(
-						{'top' : '-10px'}, 
-						{ 	
-							complete:function(){
-								self.showPageSingleWork();
-							}
-						}
-					);
-				}	
-
+			$header.find("#navigation li").each(function(){
+				$(this).find('a').data("page") == newPage ? $(this).addClass("active") : $(this).removeClass("active");
 			});
-	},
 
-	showPageSingleWork : function(){
+			// On cache la page visible
+			$("#"+self.currentPage)
+			.velocity(
+				{ scale : 0.98, opacity : 0 }, 
+				{ 
+					duration : 200,  
+					// easing : "easeInOutBack", 
+					complete: function(){
 
-		$("header").animate({"opacity":"0"});
+						self.currentPage = newPage;
 
-		$("#works").animate({"opacity":"0"}, 400);
+						$(this).css({"display": "none"}).velocity({scale :1 }, 0, function(){
+							
+							// Ensuite, on affiche la page passée en paramètre
+							$("#"+self.currentPage).css("display", "block").velocity(
+								{opacity:1}, 
+								{	
+									duration:250
+								}
+							);
+						});
+					}
+				}
+			);
 
-		var $singleWorks = document.querySelector("#single-work");
-		$singleWorks.style.display = "block";
-		$singleWorks.style.opacity = 1;
+		},
 
-		/*$("#single-work").css({"display" : "block"})
-		.delay(100)
-		.animate(
-			{"opacity":1}, 
-			{ duration: 400 }
-		);*/
+		showWork : function(workId){
 
-		$("#cross").on('click', function(){
-			self.closeWork();		
-		});
+			// Page single-work déjà affichée, on la cache, on récupère les informations pour le projet sélectionné
+			if($("#single-work").css("display") == "block"){
 
-		$(document).keyup(function(e){
-			if (e.keyCode == 27) { self.closeWork(); }  
-		});
-	},
+		 		$("#single-work").velocity({"scale":0.95, "opacity":0}, 300, "ease", function(){
+			 			$(this).velocity({"scale":1}, 0);
+			 			Portfolio.prepareSingleWorkPage(workId);
+		 			}
+		 		);
+		 	// Sinon on scroll jusqu'en haut de la page
+		 	}else{
+		 		Portfolio.scrollTo("body", 500, workId);
+		 	}
 
-	closeWork : function(){
-		$("#single-work").animate({/*"scale":0.98,*/ "opacity":0}, 400, /*"ease",*/ function(){
-				$(this).css("display", "none");/*.animate({"scale":1})*/
-				$("header").animate({"opacity":"1"}, 300);
-				$("#works").animate({"opacity":"1"}, 300);
-		});
+		},
 
+		scrollTo : function(link, time, workId){
 
+			var self = this;
 
-	}
-}
+			var time = time || 1000,
+				workId = workId || null;
 
+			$('body, html')
+			.animate({ scrollTop: $(link).offset().top }, time, "easeInOutExpo")
+			// Utilisation du promise+then, en appliquant l'animation sur body et html, le callback est déclenché 2 fois
+			.promise()
+    		.then(function(){
+				if(workId != null){
+					var work = self.works[workId];
+					if(!work.allImagesLoaded){
+						$header.velocity(
+							{"top": -headerHeight}, 
+							400, 
+							"ease", 
+							function(){
+								self.prepareSingleWorkPage(workId);
+							}
+						);
+					}else{
+						self.prepareSingleWorkPage(workId);
+					}
+				}
+			});
+			return false;
+		},
 
-/*************/
-/* PAGE SINGLE-WORK */
-/*************/
+		prepareSingleWorkPage : function(workId){
 
-// var $navigation = $(".navigation"),
-// limit = 90;
+			var id = parseInt(workId),
+				work = this.works[id],
+				works = this.works,
+				page = "#single-work";
 
-// $window.on('scroll', function(){
+		 	// Ajout des informations sur la page
 
-// 	var s = $(this).scrollTop();
+			$(page+" #title").html(work.title);
+			$(page+" #description").html(work.description);
+			$(page+" #technologies span").html(work.technologies);
+			$(page+" #date span").html(work.date);
+			$(page+" #context").html(work.context);
 
-// 	if(s>=limit){
-// 		$navigation.addClass("fixed");
-// 	}else{
-// 		$navigation.removeClass("fixed");
-// 	}
-// });
+			var prevWork = (id == 0) ? works[works.length-1] : works[id-1];
+			$(page+" #previous-work .legend-array span").html(prevWork.title);
+			$(page+" #previous-work").attr("href", "works/"+prevWork.id);
 
-/****************/
-/* FORMULAIRE DE PAGE CONTACT */
-/****************/
+			var nextWork = (id == works.length-1) ? works[0] : works[id+1];
+			$(page+" #next-work .legend-array span").html(nextWork.title);
+			$(page+" #next-work").attr("href", "works/"+nextWork.id);
 
-var $name = $('#form-name'),
-$email = $('#form-email'),
-$message = $('#form-message'),
-emailReg = new RegExp(/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i);
+			this.WorkPicturesUploader.init(work);
 
-/* Fonctions pour vérifier les valeurs rentrées dans chaque champ */
+		},
 
-function checkName(){
-	$name.val()!="" && $name.val().length < 2 ? $name.addClass("error") : $name.removeClass("error");
-}
+		WorkPicturesUploader : {
 
-function checkEmail(){
-	$email.val()!="" && !emailReg.test($email.val()) ? $email.addClass("error") : $email.removeClass("error");
-}
+			work : null,
+			countedImages: 0,
+			loadedImages : 0,
+			allImagesAlreadyLoaded : false,
 
-function checkMessage(){
-	$message.removeClass("error");
-}
+			init : function(work){
 
-/* Changement de valeur des champs */
+				this.work = work;
+				this.countedImages = work.gallery.length;
+				this.loadedImages = 0;
+				this.allImagesAlreadyLoaded = work.allImagesLoaded;
 
-$name.change(function() { checkName(); });
-$email.change(function(){ checkEmail(); });
-$message.change(function(){ checkMessage(); });
-	
-/* Soumission du formulaire */
+				$("#wrapper-pictures").empty();
+				$("#progress-bar").css({"display": "block", "top":"0", "width":"0"});
 
-$("#form").on("submit", function(e){
-	
-	e.preventDefault();
+				var pictures = this.work.gallery;
 
-	$this = $(this);
+				for(var i = 0; i < pictures.length; i++){
 
-	var valid_form = $name.val().length > 1 && emailReg.test($email.val()) && $message.val()!="";
+					var title = pictures[i].title;
+					var url = "assets/img/"+work.name+"/"+pictures[i].url+".jpg";
 
-	if(!valid_form){
+					var image = new Image();
 
-		$name.val().length > 1 ? $name.removeClass("error") : $name.addClass("error");
+					$(image).attr({src:url, alt: title});
 
-		emailReg.test($email.val()) ? $email.removeClass("error") : $email.addClass("error");
+					if (image.complete || image.readyState === 4){
+						this.addImage(title, url);
+					}else{
+						$(image).one("load", this.addImage(title, url));
+					}
+				}
+			}, 
 
-		$message.val().length != 0 ? $message.removeClass("error") : $message.addClass("error");
+			addImage : function(title, url){
 
-	}else{
+				var self = this;
 
-		$name.removeClass("error");
-		$email.removeClass("error");
-		$message.removeClass("error");
+				var $wrapperImage = $('<div class="picture" data-sr="enter left move 50px over 1s"><h5>'+title+'</h5><img src="'+url+'" alt="'+title+'" /></div>');
 
-		$.ajax({
-			type : $this.attr("method"),
-			url : $this.attr("action"),
-			data : $this.serialize(),
-			dataType : 'json',
-			success : function(json){	
-				$('#form-notif').addClass("green").hide().html(json.response).slideDown("slow").delay(2000).slideUp("slow", function(){
-					$('#form-notif').removeClass("green")
-				});
+				$wrapperImage.appendTo($("#wrapper-pictures"));
 
-				$name.val("");
-				$email.val("");
-				$message.val("");
+				self.loadedImages++;
+
+				if(!(self.allImagesAlreadyLoaded)){
+					self.updateProgressBar();
+				}else{
+					if(self.loadedImages == self.countedImages){
+						Portfolio.showPageSingleWork();
+					}
+				}
+
 			},
-			error : function(result, statut, error){
-				$('#form-notif').addClass("red").html("An error has occured. Please try again.").slideDown("slow").delay(2000).slideUp().removeClass("red");
-			}	
-		});
+
+			updateProgressBar : function(){
+
+				var self = this;
+
+				var loadedImages = self.loadedImages, 
+				countedImages = self.countedImages;
+
+				// var work = Portfolio.works[self.work.id];
+				var loadedWork = Portfolio.works[self.work.id];
+
+				$('#progress-bar')
+				.velocity("stop")
+				.velocity(
+					{'width' : (loadedImages/countedImages)*100 + '%'}, 
+					300, 
+					"ease",
+					function(){
+						if(loadedImages == countedImages){
+							loadedWork.allImagesLoaded = true;
+							$(this).velocity(
+								{'top' : '-10px'}, 
+								{ 	
+									complete:function(){
+										Portfolio.showPageSingleWork();
+									}
+								}
+							);
+						}	
+					}
+				);
+			}
+		},
+
+		showPageSingleWork : function(){
+
+			var self = this;
+			
+			$("#works").velocity({"opacity":"0"}, 300);
+
+			$("#single-work")
+			.css({"display" : "block"})
+			.velocity(
+				{scale:1, opacity:1}, 
+				{ 
+					duration: 400, 
+					easing : "ease", 
+					complete : function(){ 
+						window.scrollReveal.init(true); 
+					}
+				}
+			);
+		
+			$(document).one('keyup', function(e){
+				// Escape
+				if (e.keyCode == 27) { 
+					self.closeWork(); // Go back to home
+				// Left arrow
+				}else if(e.keyCode == 37){ 
+					$('#previous-work').trigger("click");
+				// Right arrow
+				}else if(e.keyCode == 39){
+					$('#next-work').trigger("click");
+				}
+			});
+		},
+
+		closeWork : function(){
+			$("header").css("top",0);
+			$("#single-work").velocity({scale :0.99, opacity:0}, 200, "ease", function(){
+					$("#single-work").css("display", "none");
+					$works.velocity({opacity:1}, 300);
+			});
+
+		}
+
+	}
+	
+	var Work = function(i, work){
+
+		this.id = i;
+		this.name = work.name;
+		this.title = work.title;
+		this.description = work.description;
+		this.technologies = work.technologies;
+		this.date = work.date;
+		this.context = work.context;
+		this.gallery = work.gallery;
+		this.allImagesLoaded = false;
+
+	};
+
+	/*************/
+	/* PAGE SINGLE-WORK */
+	/*************/
+
+	// var $navigation = $(".navigation"),
+	// limit = 90;
+
+	// $(window).on('scroll', function(){
+
+	// 	var s = $(this).scrollTop();
+
+	// 	if(s>=limit){
+	// 		$navigation.addClass("fixed");
+	// 	}else{
+	// 		$navigation.removeClass("fixed");
+	// 	}
+	// });
+
+	/****************/
+	/* FORMULAIRE DE PAGE CONTACT */
+	/****************/
+
+	var Form = {
+
+		form : "",
+		name : "",
+		mail : "",
+		message : "",
+		emailReg : new RegExp(/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i),
+
+		init : function(){
+
+			var self = this;
+
+			self.name = $('#form-name');
+			self.name.change(function() { self.checkName(); });
+			self.mail = $('#form-email');
+			self.mail.change(function(){ self.checkEmail(); });
+			self.message = $('#form-message');
+			self.message.change(function(){ self.checkMessage(); });
+
+			self.form = $("#form");
+
+			self.form.on("submit", function(e){
+		
+				e.preventDefault();
+
+				var valid_form = self.name.val().length > 1 && self.emailReg.test(self.mail.val()) && self.message.val()!="";
+
+				if(valid_form){
+					self.sendForm();
+				}else{
+					self.checkForm();
+				}
+			});
+
+		},
+
+		checkName : function(){
+			var $name = this.name;
+			$name.val()!="" && $name.val().length < 2 ? $name.addClass("error") : $name.removeClass("error");
+		},
+
+		checkEmail : function(){
+			var emailReg = new RegExp(/^[_\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\.)+[a-zA-Z]{2,6}$/i);
+			var $email = this.mail;
+			$email.val()!="" && !emailReg.test($email.val()) ? $email.addClass("error") : $email.removeClass("error");
+		},
+
+		checkMessage : function(){
+			var $message = this.message;
+			$message.removeClass("error");
+		},
+
+		checkForm : function(){
+
+			var $name = this.name;
+			var $email = this.mail;
+			var $message = this.message;
+
+			$name.val().length > 1 ? $name.removeClass("error") : $name.addClass("error");
+
+			this.emailReg.test($email.val()) ? $email.removeClass("error") : $email.addClass("error");
+
+			$message.val().length != 0 ? $message.removeClass("error") : $message.addClass("error");
+		},
+
+		sendForm : function(){
+
+			var $name = this.name,
+			$email = this.mail,
+			$message = this.mail;
+
+			$name.removeClass("error");
+			$email.removeClass("error");
+			$message.removeClass("error");
+
+			$.ajax({
+				type : this.form.attr("method"),
+				url : this.form.attr("action"),
+				data : this.form.serialize(),
+				dataType : 'json',
+				success : function(json){	
+					$('#form-notif').addClass("green").hide().html(json.response).slideDown("slow").delay(2000).slideUp("slow", function(){
+						$('#form-notif').removeClass("green")
+					});
+
+					$name.val("");
+					$email.val("");
+					$message.val("");
+				},
+				error : function(result, statut, error){
+					$('#form-notif').addClass("red").html("An error has occured. Please try again.").slideDown("slow").delay(2000).slideUp().removeClass("red");
+				}	
+			});
+		}
 	}
 
-});
+
+
+
+})(jQuery)
