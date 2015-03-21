@@ -60,7 +60,7 @@ p{
 	font-family: 'Open Sans';
 	font-size: 1em;
 	margin-bottom: 26px;
-	font-weight: 200;
+	font-weight: 400;
 }
 
 label, input, textarea{
@@ -90,10 +90,6 @@ section .wrapper-text{
 	margin: 0 auto;
 	padding: 0 20px;
 	max-width: 680px;
-}
-
-section .wrapper-text p{
-	margin-bottom: 26px;
 }
 
 .center{
@@ -189,7 +185,7 @@ margin-top: calc(50vh - 30px);
 
 
 /*********************************************************************/
-/* INTRO                                                            */
+/* INTRODUCTION                                                            */
 /*********************************************************************/
 
 #introduction{
@@ -201,26 +197,33 @@ margin-top: calc(50vh - 30px);
 	width: 100%;
 }
 
+#introduction #profil{
+	background-image: url(../img/ameziane.jpg);
+	background-size: 100% 100%;
+	margin: 0 auto;
+  	border: solid #66cc99;
+	height: 120px;
+	width: 120px;
+	border-radius: 60px;
+}
+
 #introduction p{
-	font-size: 1.8em;
+	font-size: 1.6em;
 	line-height: 1.5;
 	text-align: center;
+	margin-top: 30px;
 }
 
 #introduction p #my-name, #introduction p #hetic{
-	font-weight: 600;
+	font-weight: 400;
 	display: inline-block;
-}
-
-#introduction a#enter-portfolio{
-	font-size: 1.1em;
-	font-weight: 300;
 }
 
 #introduction #hetic:after{
 	display: block;
 	width: 0;
-	height: 4px;
+	height: 3px;
+	margin-top: -2px;
 	background-color: #4AAA4A;
 	content: "";
 	-webkit-transition: width .3s ease;
@@ -230,6 +233,24 @@ margin-top: calc(50vh - 30px);
 	transition: width .3s ease;
 }
 
+#introduction a#enter-portfolio{
+	font-size: 1.1em;
+	font-weight: 400;
+	color: #000;
+	width: 100px;
+	-webkit-transition: color .3s ease;
+	-moz-transition: color .3s ease;
+	-ms-transition: color .3s ease;
+	-o-transition: color .3s ease;
+	transition: color .3s ease;
+}
+
+#introduction a#enter-portfolio:hover{
+	color:#66cc99;
+}
+
+
+
 #introduction #hetic:hover:after{
 	width: 100%;
 }
@@ -237,6 +258,7 @@ margin-top: calc(50vh - 30px);
 .go-to{
 	margin: 80px auto 0;
 	display: block;
+	width: auto;
 	cursor: pointer;
 	text-align: center;
 }
@@ -279,10 +301,8 @@ margin-top: calc(50vh - 30px);
 }
 
 
-
-
 /*********************************************************************/
-/* NAVBAR                                                            */
+/* HEADER                                                            */
 /*********************************************************************/
 
 header{
@@ -328,6 +348,7 @@ header #navigation li a{
 	transition: color .3s ease;
 	cursor:pointer;
 	font-weight: 700;
+	color:#2e8b57;
 }
 
 header #navigation li a:after{
@@ -357,12 +378,30 @@ header #toggle{
 }
 
 /*********************************************************************/
+/* ABOUT                                                              */
+/*********************************************************************/
+
+#about a#link-school{
+  font-size: 1.05em;
+  color: green;
+}
+
+#about .go-to{
+	font-size: 1.05em;
+}
+
+#about p{
+	margin-bottom: 26px;
+	line-height: 1.4;
+}
+
+/*********************************************************************/
 /* WORKS                                                              */
 /*********************************************************************/
 
 #wrapper-works{
 	max-width: 960px;
-	margin: 50px auto;
+	margin: 100px auto 50px
 }
 
 #wrapper-works .work {
@@ -406,10 +445,8 @@ header #toggle{
 
 
 /*********************************************************************/
-/* SINGLE-WORK                                                              */
+/* SINGLE-WORK                                                       */
 /*********************************************************************/
-
-/***** Navigation *****/
 
 #single-work{
 	position: absolute;
@@ -430,7 +467,7 @@ header #toggle{
   	height: 90px;
   	position: fixed;
   	top:10px;
-  	right:20px;
+  	right:30px;
   	cursor: pointer;
 	/*-webkit-transform: translateZ(0);	*/
 	-webkit-transform:rotate(45deg);
@@ -454,7 +491,7 @@ header #toggle{
 }
 
 #close-work:hover:before, #close-work:hover:after{
-  background: #3D6394;
+  background: #66cc99;
 }
 
 #close-work:before {
@@ -532,6 +569,7 @@ header #toggle{
 	opacity: 0;
 	top: 15px;
 	cursor: pointer;
+	font-size: 0.98em;
 	-webkit-transition: all 0.3s ease;
 	-moz-transition: all 0.3s ease;
 	-ms-transition: all 0.3s ease;
@@ -590,6 +628,20 @@ header #toggle{
 	padding-bottom: 0;
 	text-align: center;
 	font-size: 2em;
+	margin-top: 20px;
+}
+
+#wrapper-work #url{
+	text-align: center;
+	margin-top: 15px;
+}
+
+#wrapper-work #url a{
+	color:#66cc99;
+}
+
+#wrapper-work #url a i{
+	margin-left: 6px;
 }
 
 #wrapper-work h4{
@@ -600,8 +652,12 @@ header #toggle{
 }
 
 #information{
-	margin: 30px auto 0;
+	margin: 40px auto 0;
 	text-align: center;
+}
+
+#information > span{
+	display: block;
 }
 
 #presentation{
@@ -716,6 +772,17 @@ header #toggle{
 	text-align: center;
 }
 
+#contact #cv{
+	color:#000;
+	font-size: 1.1em;
+	webkit-transition: color 0.3s ease;
+	transition: color 0.3s ease;
+}
+
+#contact #cv:hover{
+	color:#66cc99;
+}
+
 #form{
 	width: 100%;
 	display: block;
@@ -730,7 +797,6 @@ header #toggle{
 	width: 70px;
 	height: 30px;
 	text-align: right;
-	font-weight: 300;
 }
 
 #form textarea{
@@ -758,7 +824,6 @@ header #toggle{
 	border-color:#000;
 }
 
-
 #form input, #form textarea{
 	-webkit-transition: border .3s ease, color .3s ease;
 	-moz-transition: border .3s ease, color .3s ease;
@@ -767,11 +832,21 @@ header #toggle{
 	transition: border .3s ease, color .3s ease;
 }
 
+#form textarea{
+    height: 70px;
+    border-bottom: 1px solid #000;
+}
+
+/*#form label#label-message{
+	vertical-align: top;
+	margin-top: 6px;
+}*/
+
 #form input[type="submit"]{
 	border:0;
 	cursor:pointer;
-	margin-top: 30px;
-	font-size: 1.2em;
+	margin-top: 40px;
+	font-size: 1.4em;
 	font-weight: bold;
 	background:none;
 }
@@ -813,21 +888,6 @@ header #toggle{
 #external-links a:hover{
 	opacity: 0.7;
 }
-
-#cv{
-	display: inline-block;
-	margin-top: 20px;
-	color:#000;
-	 font-size: 1em;
-	-webkit-transition: color 0.3s ease;
-	transition: color 0.3s ease;
-}
-
-#cv:hover{
-	color:#66cc99;
-}
-
-
 
 /* work > div sur écran d'ordinateur */
 

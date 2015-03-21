@@ -8,16 +8,16 @@
 		},
 		$loader = $("#loader"),
 		$header = $("header"),
-		headerHeight = $header.outerHeight();
 		$intro = $("#introduction"),
 		$about = $("#about"),
 		$works = $("#works"),
-		$contact = $("#contact")
-		containers = [$about, $works, $contact]; 
+		$singleWork = $("#single-work"),
+		$contact = $("#contact"),
+		headerHeight = $header.outerHeight();
 
 	$.getJSON("works.json", function(result){
 		// Affichage des sites
-		Portfolio.init(result.works);
+		Portfolio.init(result);
 	});
 
 	$(window).resize(function(){
@@ -37,28 +37,31 @@
 		$("#navigation").slideToggle();
 	});
 
-	$('body').on('click', 'header a, #about a, #works a, #single-work a', function(e){
-			
+	// Mettre en place data-id, pour permettre aux liens avec réels href de s'ouvrir normalemnt
+
+	$('body').on('click', 'a', function(e){
+
 		e.preventDefault();
 
-		if($(this).data("page")){
-			var link = $(this).data("page");
-			if(link != Portfolio.currentPage){
-				Portfolio.showPage(link);	
-			}
-		}else if($(this).attr("href")){
+		// Cas 1 : lien href
+		
+		if($(this).attr("href")){
 
 			var link = $(this).attr("href");
 
 			if(link.indexOf('#') > -1){
 				Portfolio.scrollTo(link);
+			}else if(link.indexOf("http") == -1){
+				Portfolio.showPage(link);	
 			}else{
-				link = link.split("/");
-				var workId = link[1];
-				//si déjà chargé montrer pahge projet directement
-				Portfolio.showWork(workId);
+				window.open(link);
 			}
-
+		}
+		// Cas 2 : lien vers projet
+		else if($(this).data("id")){
+			// on récupère la valeur "id" du lien cliqué 
+			var id = e.currentTarget.dataset.id;
+			Portfolio.showWork(id);
 		}
 
 	});
@@ -89,7 +92,7 @@
 
 			var self = this;
 
-			self.countedWorks = works.length;
+			this.countedWorks = works.length;
 
 	    	$.each(works, function(i, w){
 	 			self.works[i] = new Work(i, w);
@@ -111,7 +114,7 @@
 
 				// Création du lien vers le projet
 			
-				var $workThumb = $('<a class="work" href="works/'+ work.id +'"><div><span class="title">'+ work.title +'</span></div></a>');
+				var $workThumb = $('<a class="work" data-id="'+work.id +'"><div><span class="title">'+ work.title +'</span></div></a>');
 				// Ajout de l'image dans le lien
 				$workThumb.find("div").before($(this));
 				// Ajout du lien dans la page "works"
@@ -136,6 +139,7 @@
 										complete:function(){
 											$(this).css("display","none");
 											self.showIntro();
+
 										}
 									}
 								);
@@ -210,7 +214,7 @@
 			var self = this;
 
 			$header.find("#navigation li").each(function(){
-				$(this).find('a').data("page") == newPage ? $(this).addClass("active") : $(this).removeClass("active");
+				$(this).find('a').attr("href") == newPage ? $(this).addClass("active") : $(this).removeClass("active");
 			});
 
 			// On cache la page visible
@@ -242,12 +246,16 @@
 
 		showWork : function(workId){
 
-			// Page single-work déjà affichée, on la cache, on récupère les informations pour le projet sélectionné
-			if($("#single-work").css("display") == "block"){
+			console.log("show Work workId :"+ workId);
 
-		 		$("#single-work").velocity({"scale":0.95, "opacity":0}, 300, "ease", function(){
+			var self = this;
+
+			// Page single-work déjà affichée, on la cache, on récupère les informations pour le projet sélectionné
+			if($singleWork.css("display") == "block"){
+
+		 		$singleWork.velocity({"scale":0.95, "opacity":0}, 300, "ease", function(){
 			 			$(this).velocity({"scale":1}, 0);
-			 			Portfolio.prepareSingleWorkPage(workId);
+			 			Portfolio.prepareSingleWorkPage(self.works[workId-1]);
 		 			}
 		 		);
 		 	// Sinon on scroll jusqu'en haut de la page
@@ -261,74 +269,96 @@
 
 			var self = this;
 
-			var time = time || 1000,
-				workId = workId || null;
+			var time = time || 1000;
+
+			var workId = workId || null;
 
 			$('body, html')
 			.animate({ scrollTop: $(link).offset().top }, time, "easeInOutExpo")
 			// Utilisation du promise+then, en appliquant l'animation sur body et html, le callback est déclenché 2 fois
 			.promise()
     		.then(function(){
+
 				if(workId != null){
-					var work = self.works[workId];
+					var work = self.works[workId-1];
 					if(!work.allImagesLoaded){
 						$header.velocity(
 							{"top": -headerHeight}, 
 							400, 
 							"ease", 
 							function(){
-								self.prepareSingleWorkPage(workId);
+								self.prepareSingleWorkPage(work);
 							}
 						);
 					}else{
-						self.prepareSingleWorkPage(workId);
+						self.prepareSingleWorkPage(work);
+						// On remonte le header une fois que la page "works" disparait 
+						setTimeout(function () {
+							$header.css("top", -headerHeight);
+						}, 500);
 					}
 				}
 			});
 			return false;
 		},
 
-		prepareSingleWorkPage : function(workId){
+		prepareSingleWorkPage : function(work){
 
-			var id = parseInt(workId),
-				work = this.works[id],
+			console.log(work);
+
+			var id = work.id,
 				works = this.works,
-				page = "#single-work";
+				$url = $singleWork.find("#url a"),
+				$icon = $("<i></i>");
 
-		 	// Ajout des informations sur la page
+		 	$singleWork.find("#title").html(work.title);
+		 				
+			$url.attr("href", work.url[1]);
 
-			$(page+" #title").html(work.title);
-			$(page+" #description").html(work.description);
-			$(page+" #role").html(work.role);
-			$(page+" #technologies").html(work.technologies);
-			$(page+" #date").html(work.date);
-			$(page+" #presentation").html(work.presentation);
+			if(work.url[0] == "site")
+			{
+				$url.html("See the site");
+				$icon.addClass("fa fa-link fa-lg");
+			}
+			else if(work.url[0] == "github")
+			{
+				$url.html("Go to Github repository");
+				$icon.addClass("fa fa-github fa-lg");
+			}
 
-			var prevWork = (id == 0) ? works[works.length-1] : works[id-1];
-			$(page+" #previous-work .legend-array span").html(prevWork.title);
-			$(page+" #previous-work").attr("href", "works/"+prevWork.id);
+			$icon.appendTo($url);
 
-			var nextWork = (id == works.length-1) ? works[0] : works[id+1];
-			$(page+" #next-work .legend-array span").html(nextWork.title);
-			$(page+" #next-work").attr("href", "works/"+nextWork.id);
+			$singleWork.find("#description").html(work.description);
+			$singleWork.find("#role").html(work.role);
+			$singleWork.find("#technologies").html(work.technologies);
+			$singleWork.find("#date").html(work.date);
+			$singleWork.find("#presentation").html(work.presentation);
 
-			this.WorkPicturesUploader.init(work);
+			var prevWork = (id == 1) ? works[works.length-1] : works[id-2];
+			$singleWork.find("#previous-work .legend-array span").html(prevWork.title);
+			$singleWork.find("#previous-work").attr("data-id", prevWork.id);
+			
+			var nextWork = (id == works.length) ? works[0] : works[id];
+			$singleWork.find("#next-work .legend-array span").html(nextWork.title);
+			$singleWork.find("#next-work").attr("data-id", nextWork.id);
+
+			this.workPicturesUploader.init(work);
 
 		},
 
-		WorkPicturesUploader : {
+		workPicturesUploader : {
 
 			work : null,
 			countedImages: 0,
 			loadedImages : 0,
-			allImagesAlreadyLoaded : false,
+			allImagesLoaded : false,
 
 			init : function(work){
 
 				this.work = work;
 				this.countedImages = work.gallery.length;
 				this.loadedImages = 0;
-				this.allImagesAlreadyLoaded = work.allImagesLoaded;
+				this.allImagesLoaded = work.allImagesLoaded;
 
 				$("#wrapper-pictures").empty();
 				$("#progress-bar").css({"display": "block", "top":"0", "width":"0"});
@@ -362,7 +392,7 @@
 
 				self.loadedImages++;
 
-				if(!(self.allImagesAlreadyLoaded)){
+				if(!(self.allImagesLoaded)){
 					self.updateProgressBar();
 				}else{
 					if(self.loadedImages == self.countedImages){
@@ -379,9 +409,6 @@
 				var loadedImages = self.loadedImages, 
 				countedImages = self.countedImages;
 
-				// var work = Portfolio.works[self.work.id];
-				var loadedWork = Portfolio.works[self.work.id];
-
 				$('#progress-bar')
 				.velocity("stop")
 				.velocity(
@@ -390,7 +417,7 @@
 					"ease",
 					function(){
 						if(loadedImages == countedImages){
-							loadedWork.allImagesLoaded = true;
+							Portfolio.works[self.work.id-1].allImagesLoaded = true;
 							$(this).velocity(
 								{'top' : '-10px'}, 
 								{ 	
@@ -409,19 +436,15 @@
 
 			var self = this;
 			
-			$("#works").velocity({"opacity":"0"}, 300);
+			$header.velocity({"opacity":"0"}, 200, "easeInSine");
+			$works.velocity({"opacity":"0"}, 200, "easeInSine");
 			
 			window.scrollReveal.init(true); 
 
 			$("#single-work")
 			.css({"display" : "block"})
-			.velocity(
-				{scale:1, opacity:1}, 
-				{ 
-					duration: 400, 
-					easing : "ease", 
-				}
-			);
+			.delay(100)
+			.velocity({scale:1, opacity:1}, 400, "easeInSine");
 		
 			$(document).one('keyup', function(e){
 				// Escape
@@ -438,9 +461,9 @@
 		},
 
 		closeWork : function(){
-			$("header").css("top",0);
-			$("#single-work").velocity({scale :0.99, opacity:0}, 200, "ease", function(){
-					$("#single-work").css("display", "none");
+			$singleWork.velocity({scale :0.99, opacity:0}, 200, "ease", function(){
+					$singleWork.css("display", "none");
+					$header.velocity({top:0, opacity:1}, 300);
 					$works.velocity({opacity:1}, 300);
 			});
 
@@ -450,17 +473,19 @@
 	
 	var Work = function(i, work){
 
-		this.id = i;
+		this.id = i+1;
 		this.name = work.name;
 		this.title = work.title;
 		this.description = work.description;
+		this.role = work.role;
 		this.presentation = work.presentation;
 		this.technologies = work.technologies;
 		this.date = work.date;
-		this.context = work.context;
 		this.gallery = work.gallery;
 		this.allImagesLoaded = false;
-
+		this.url = [];
+		this.url.push(work.url.type);
+		this.url.push(work.url.content);
 	};
 
 	/*************/

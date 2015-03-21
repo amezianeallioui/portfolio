@@ -1,10 +1,9 @@
-{ 
-	"works" : [
+[
 	{
 		"name" : "sampleo",
 		"title" : "Sampleo",
-		"description" : "Development of the responsive version of sampleo.com",
 		"role" : "Project Manager, front-end developer",
+		"description" : "Development of the responsive version of sampleo.com",
 		"technologies" : "HTML5, CSS3, jQuery, Symfony2",
 		"date" : "July-August '14",
 		"presentation" : "Rapeller objet du stie, client, contexte., ton rôle...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed elementum mauris. Vivamus ultrices lorem quis massa vehicula, aliquam ullamcorper nulla iaculis. Duis quam metus, pharetra a feugiat a, ultrices id leo. Mauris sit amet justo eu magna ultrices venenatis in vel purus. Fusce at bibendum justo, eget vulputate lorem. Nulla nec mollis enim, eget ultrices orci. Suspendisse dui ligula, feugiat vehicula ipsum sit amet, tincidunt consectetur purus. Nullam volutpat luctus massa, bibendum euismod justo imperdiet sed. Nunc a erat imperdiet, congue est ut, finibus nisl.",
@@ -26,13 +25,17 @@
 				"url" : "sampleo_4"
 			}
 
-		]
+		],
+		"url" : {
+			"type" : "site",
+			"content" : "http://www.sampleo.com" 
+		} 
 	},
 	{
 		"name" : "geofarming",
 		"title" : "Geofarming",
-		"description" : "Development of the responsive version of sampleo.com",
 		"role" : "Project Manager, front-end developer",
+		"description" : "Development of the responsive version of sampleo.com",		
 		"technologies" : "AngularJS, HTML5, CSS3",
 		"date" : "July-August '14",
 		"presentation" : "Rapeller objet du stie, client, contexte., ton rôle...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed elementum mauris. Vivamus ultrices lorem quis massa vehicula, aliquam ullamcorper nulla iaculis. Duis quam metus, pharetra a feugiat a, ultrices id leo. Mauris sit amet justo eu magna ultrices venenatis in vel purus. Fusce at bibendum justo, eget vulputate lorem. Nulla nec mollis enim, eget ultrices orci. Suspendisse dui ligula, feugiat vehicula ipsum sit amet, tincidunt consectetur purus. Nullam volutpat luctus massa, bibendum euismod justo imperdiet sed. Nunc a erat imperdiet, congue est ut, finibus nisl.",
@@ -54,12 +57,17 @@
 				"url" : "sampleo_4"
 			}
 
-		]
+		],
+		"url" : {
+			"type" : "github",
+			"content" : "http://github.com/" 
+		} 
 	},
 	{
 		"name" : "find-it-out",
 		"title" : "Find-it-out",
 		"description" : "Development of the responsive version",
+		"role" : "Project Manager, front-end developer",
 		"technologies" : "HTML5, CSS3, jQuery, Symfony2",
 		"date" : "July-August '14",
 		"presentation" : "Rapeller objet du stie, client, contexte., ton rôle...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed elementum mauris. Vivamus ultrices lorem quis massa vehicula, aliquam ullamcorper nulla iaculis. Duis quam metus, pharetra a feugiat a, ultrices id leo. Mauris sit amet justo eu magna ultrices venenatis in vel purus. Fusce at bibendum justo, eget vulputate lorem. Nulla nec mollis enim, eget ultrices orci. Suspendisse dui ligula, feugiat vehicula ipsum sit amet, tincidunt consectetur purus. Nullam volutpat luctus massa, bibendum euismod justo imperdiet sed. Nunc a erat imperdiet, congue est ut, finibus nisl.",
@@ -85,13 +93,18 @@
 				"url" : "sampleo_5"
 			}
 
-		]
+		],
+		"url" : {
+			"type" : "github",
+			"content" : "http://github.com/" 
+		} 
 	},
 
 	{
 		"name" : "cafe-culturel",
 		"title" : "Café Culturel",
 		"description" : "Development of the responsive version",
+		"role" : "Project Manager, front-end developer",
 		"technologies" : "HTML5, CSS3, jQuery, Symfony2",
 		"date" : "July-August '14",
 		"presentation" : "Rapeller objet du stie, client, contexte., ton rôle...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed elementum mauris. Vivamus ultrices lorem quis massa vehicula, aliquam ullamcorper nulla iaculis. Duis quam metus, pharetra a feugiat a, ultrices id leo. Mauris sit amet justo eu magna ultrices venenatis in vel purus. Fusce at bibendum justo, eget vulputate lorem. Nulla nec mollis enim, eget ultrices orci. Suspendisse dui ligula, feugiat vehicula ipsum sit amet, tincidunt consectetur purus. Nullam volutpat luctus massa, bibendum euismod justo imperdiet sed. Nunc a erat imperdiet, congue est ut, finibus nisl.",
@@ -113,13 +126,18 @@
 				"url" : "sampleo_4"
 			}
 
-		]
+		],
+		"url" : {
+			"type" : "github",
+			"content" : "http://github.com/" 
+		} 
 	},
 
 	{
 		"name" : "dear-boutique",
 		"title" : "Dear Boutique",
 		"description" : "Development of the responsive version",
+		"role" : "Project Manager, front-end developer",
 		"technologies" : "HTML5, CSS3, jQuery, Symfony2",
 		"date" : "July-August '14",
 		"presentation" : "Rapeller objet du stie, client, contexte., ton rôle...Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed elementum mauris. Vivamus ultrices lorem quis massa vehicula, aliquam ullamcorper nulla iaculis. Duis quam metus, pharetra a feugiat a, ultrices id leo. Mauris sit amet justo eu magna ultrices venenatis in vel purus. Fusce at bibendum justo, eget vulputate lorem. Nulla nec mollis enim, eget ultrices orci. Suspendisse dui ligula, feugiat vehicula ipsum sit amet, tincidunt consectetur purus. Nullam volutpat luctus massa, bibendum euismod justo imperdiet sed. Nunc a erat imperdiet, congue est ut, finibus nisl.",
@@ -141,7 +159,11 @@
 				"url" : "sampleo_4"
 			}
 
-		]
+		],
+		"url" : {
+			"type" : "github",
+			"content" : "http://github.com/" 
+		} 
 	}
-	
-]}
+
+]
