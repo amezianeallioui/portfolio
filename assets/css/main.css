@@ -92,7 +92,7 @@ section h2{
 
 section .wrapper-text{
 	margin: 0 auto;
-	padding: 0 20px 60px;
+	padding: 0 20px;
 	max-width: 680px;
 }
 
@@ -935,7 +935,7 @@ header .toggle{
 }
 
 .external-links{
-	margin-top: 40px;
+	margin: 40px 0 15px;
 }
 
 .external-links a{
