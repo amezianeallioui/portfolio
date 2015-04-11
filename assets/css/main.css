@@ -740,6 +740,10 @@ header .toggle{
 /* ABOUT                                                              */
 /*********************************************************************/
 
+#about .wrapper-text{
+	padding-bottom: 50px;
+}
+
 #about .small-link{
   font-size: 1.1em;
 }
@@ -896,6 +900,7 @@ header .toggle{
 }
 
 .form input, .form textarea{
+	padding-left: 3px;
 	-webkit-transition: border .3s ease, color .3s ease;
 	-moz-transition: border .3s ease, color .3s ease;
 	-ms-transition: border .3s ease, color .3s ease;
@@ -931,7 +936,7 @@ header .toggle{
 }
 
 .form .error{
-	border-bottom-color: #b42024 !important;
+	border-color: #b42024 !important;
 }
 
 .external-links{
