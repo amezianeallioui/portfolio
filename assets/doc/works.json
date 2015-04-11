@@ -1,0 +1,165 @@
+[
+	{
+		"name" : "sampleo",
+		"title" : "Sampleo",
+		"role" : "Front-end developer",
+		"context" : "Bachelor Degree's internship",
+		"skills" : "HTML5, CSS3, jQuery, Symfony 2",
+		"date" : "July-August '14",
+		"presentation" : "\"sampleo.com\" is a site which proposes to people to test products for free, the only condition being to let a review on it. When I started my internship in the company, the new version of the site had just come out and was only usable on desktop. Also, my main mission was to make it responsive, to increase its number of visites, but also optimized it for mobile devices. I learned to make a site cross-browser and cross-plateform and discovered the Symfony 2 framework, on which the site was developed.",
+		"gallery" : [
+			{
+				"title" : "Homepage, desktop version"
+			},			
+			{
+				"title" : "Homepage, tablet version"
+			},			
+			{
+				"title" : "Homepage, mobile version"
+			},			
+			{
+				"title" : "Product page, desktop version"
+			},			
+			{
+				"title" : "Product page, tablet version"
+			},			
+			{
+				"title" : "Product page, mobile version"
+			}
+		],
+		"url" : {
+			"type" : "site",
+			"content" : "http://www.sampleo.com" 
+		} 
+	},
+	{
+		"name" : "geofarming",
+		"title" : "Geofarming",
+		"role" : "Front-end developer",
+		"context" : "Professional project",
+		"skills" : "AngularJS, HTML5, CSS3",
+		"date" : "July-August '14",
+		"presentation" : "Geofarming is a project launched by the \"Assiette Verte\" association. It aims to teach French residents about their local agriculture, through courses using geocaching. My group and I had to develop a site, on which families could see and choose courses they want to participate in. Also, the conception was the most difficult part, asking us to ask questions like : \"How to ensure that families will access to our site and will want to use it ? How be sure they would choose a course then try it outside ?\". The UX design part took one month, then two developers and I developed the site on AngularJS during two months.",
+		"gallery" : [
+			{
+				"title" : "Homepage"
+			},			
+			{
+				"title" : "Tutorial"
+			},			
+			{
+				"title" : "Information on a course"
+			},			
+			{
+				"title" : "Description of the future application"
+			},			
+			{
+				"title" : "Modal pop-up for connexion"
+			},			
+			{
+				"title" : "First step in the creation of a course"
+			},			
+			{
+				"title" : "Second step in the creation of a course"
+			},			
+			{
+				"title" : "Last step in the creation of a course"
+			}
+		],
+		"url" : {
+			"type" : "",
+			"content" : "" 
+		} 
+	},
+	{
+		"name" : "find-it-out",
+		"title" : "Find-it-out",
+		"skills" : "HTML5, CSS3, JS, jQuery",
+		"role" : "UI Designer / Front-end developer",
+		"context" : "School project",
+		"date" : "October '13",
+		"presentation" : "Find-it-out is a website to make Parisians discover original places on their way in their everyday life. The site allows them to select several places (street-art, bar, etc.) from a starting point to an arrival point. For this project, I made the wireframes at first and then integrate the website using HTML5, CSS3 and jQuery, making in sort to make it responsive.",
+		"gallery" : [
+						{
+				"title" : "Homepage : the user can find and select the places he wants to visit."
+			},			
+			{
+				"title" : "Instructions of direction show off once the course determinated."
+			},			
+			{
+				"title" : "User's personal informations in a right sidebar."
+			},			
+			{
+				"title" : "Description of a place."
+			}
+		],
+		"url" : {
+			"type" : "github",
+			"content" : "https://github.com/Nicolas-th/projet_html" 
+		} 
+	},
+
+	{
+		"name" : "cafe-culturel",
+		"title" : "Café Culturel",
+		"skills" : "HTML5, CSS3, WordPress",
+		"role" : "Project manager / Front-end developer",
+		"context" : "Professional project",
+		"date" : "September '12-September '13",
+		"presentation" : "Café Culturel is an association borned in 1998 at Saint Denis, France. It promotes urban culture since, such as hip-hop, rap, graffiti, street-art, through activities for young people, in collaboration with French famous rappers and artists. During my Bachelor's degree, a team of 5 students and I were in charge of build a new website and new tools of communication for the association. My first role as a project manager was to manage the team, ensured the project was going well and make the connection between the association, my team and our project tutor. My second role, as a web developer, was to develop the site on WordPress within one month. This was the first time I developed a website for a client.",
+		"gallery" : [
+			{
+				"title" : "Homepage"
+			},			
+			{
+				"title" : "Page of artists"
+			},			
+			{
+				"title" : "Artist page"
+			},			
+			{
+				"title" : "Event description"
+			}
+		],
+		"url" : {
+			"type" : "site",
+			"content" : "http://cafeculturel.org" 
+		} 
+	},
+
+	{
+		"name" : "dear-boutique",
+		"title" : "Dear Boutique",
+		"skills" : "Photoshop",
+		"role" : "Web designer",
+		"context" : "Associate Degree's internship",
+		"date" : "April-June '12",
+		"presentation" : "Dear Boutique is a shop in the center of Paris, who sells jewelries and clothes for women. This is where I made my first internship in 2012. As a webdesigner, I had to recast its site's design and content. I thought at first at the new arborescence, making an audit of the actuel website, then made wireframes. Finally, I redefined the graphic charter and made more than thirty templates.",
+		"gallery" : [
+			{
+				"title" : "Homepage"
+			},			
+			{
+				"title" : "Product page"
+			},			
+			{
+				"title" : "Category page"
+			},			
+			{
+				"title" : "Description of the shop"
+			},			
+			{
+				"title" : "My cart page"
+			},			
+			{
+				"title" : "Connexion page"
+			}
+
+		],
+		"url" : {
+			"type" : "",
+			"content" : "" 
+		} 
+	}
+
+]
