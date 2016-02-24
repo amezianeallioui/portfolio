@@ -14,6 +14,16 @@
 			mobile: false
 		};
 
+
+	// Sur Firefox, la propriété css "overflow" du document doit être égal à "hidden"
+	// Sinon, les animations sur le scroll ne marcheront pas
+
+	var isFirefox =  typeof InstallTrigger !== 'undefined';
+
+	if(isFirefox){
+		$("html").css("overflow", "hidden");
+	}
+
 	// Initialisation du plugin scrollReveal
 	window.scrollReveal = new scrollReveal(configScrollreveal);
 
@@ -36,20 +46,20 @@
 		e.preventDefault();
 
 		var link = $(this).attr("href");
-		
+
 		if(link){
 			// Si le lien cliqué fait référence à une page qui n'est pas affichée
 			if( $.inArray(link , links) != -1 && link != Portfolio.currentPage){
 
 				// Si on est sur tablette ou mobile
-				if($(window).width() <= 768){ 
+				if($(window).width() <= 768){
 					// On referme le menu dépliant s'il est ouvert
 					$("nav").slideUp(function(){
 						$(".toggle").removeClass("on");
-						Portfolio.showPage(link);	
+						Portfolio.showPage(link);
 					});
 				}else{
-					Portfolio.showPage(link);	
+					Portfolio.showPage(link);
 				}
 
 			}else if(link.indexOf("#works/") > -1){ // Page d'un projet
@@ -59,7 +69,7 @@
 				Portfolio.chooseWork(id);
 
 			}else if(link.indexOf("#") > -1){ // Scroll vers une page
-				
+
 				Portfolio.scrollTo(link);
 
 			}else{ // Lien externe
@@ -73,12 +83,12 @@
 	$(document).on('keyup', function(e){
 
 		// Si on est sur la page "single-work"
-		if($singleWork.css("display") == "block"){
+		if($singleWork.is(":visible")){
 			// Escape
-			if (e.keyCode == 27) { 
+			if (e.keyCode == 27) {
 				Portfolio.closePageSingleWork(); // Go back to home
 			// Left arrow
-			}else if(e.keyCode == 37){ 
+			}else if(e.keyCode == 37){
 				$('#previous-work').trigger("click");
 			// Right arrow
 			}else if(e.keyCode == 39){
@@ -91,14 +101,14 @@
 
 	/**********************************************/
 	/**********     OBJET PORTFOLIO     ***********/
-    /**********************************************/
+  /**********************************************/
 
 	var Portfolio = {
 
 		currentPage : "", // Variable qui gardera en mémoire la page qui est couramment affichée
 		works : [], // Tableau qui contiendra tous les projets
 		countedWorks : 0, // Nombre de projets
-		loadedWorks : 0, // Nombre de projets stockés 
+		loadedWorks : 0, // Nombre de projets stockés
 
 		/**
 		Permet de stocker les différents projets dans l'objet Portfolio et lancer le chargement de leur miniature
@@ -115,7 +125,7 @@
 				self.resizedWindow();
 			});
 
-			// Ecouteur de cliquesur le bouton "toggle" pour ouvrir ou fermer le menu
+			// Ecouteur de clique sur le bouton "toggle" pour ouvrir ou fermer le menu
 			$(".toggle").on('click', function(){
 				$(this).toggleClass("on");
 				$("nav").slideToggle();
@@ -143,7 +153,7 @@
 	 				// On lance le chargement de la miniature du premier projet
 	 				self.loadWorkThumbnail(0);
 	 			}
-	    	});	
+	    	});
 
 	    },
 
@@ -170,13 +180,13 @@
 
 				// On incrémente le nombre de projets chargés et prêts
 		    	self.loadedWorks++;
-		    	
+
 		    	// On augmente la largeur de la progressbar
 	    		$('.progress-bar')
 	    		.velocity("stop")
 	    		.velocity(
 					{"width" : (self.loadedWorks/self.countedWorks)*100 + '%'
-					}, 200, "easeInOutBack", 
+					}, 200, "easeInOutBack",
 					// Callback
 					function(){
 						// Si toutes les images n'ont pas été chargées
@@ -184,36 +194,36 @@
 							// on charge la suivante
 							self.loadWorkThumbnail(i+1);
 
-						// Sinon 
+						// Sinon
 						}else{
 							//on appelle la fonction "hideProgressBar"
 							$(this).velocity(
 								{'top' : '-10px'},
-								{ 	
+								{
 									complete:function(){
 										$(this).css("display","none");
-										self.showPageAfterLoading();	
+										self.showPageAfterLoading();
 									}
 								}
 							);
 						}
 					}
-				); 
+				);
 			});
 		},
 
-		/** 
+		/**
 		Fonction pour afficher la bonne page en fonction de l'url de départ
 		**/
 		showPageAfterLoading : function(){
 
 			var self = this,
-				page = window.location.hash;	
+				page = window.location.hash;
 
 			$window.trigger("resize"); // On "simule" le redimensionnement de la fenêtre pour appeler la fonction "resizedWindow"
- 
+
 			if(page.length > 0){ // Si un chemin est indiqué dans l'url
-								
+
 				if(page.indexOf("#works/") == -1){ // L'url ne contient pas de nom de projet
 
 					self.showPage(page); // On affiche la page "works", "about" ou "contact"
@@ -263,11 +273,11 @@
 
 			$photoProfil.velocity({marginTop:0, opacity: 1}, 500, "ease", function(){
 				$textIntro.velocity(
-					{marginTop:"30px", opacity: 1}, 
+					{marginTop:"30px", opacity: 1},
 					{
-						delay:100, 
-						duration : 800, 
-						easing : "ease", 
+						delay:100,
+						duration : 800,
+						easing : "ease",
 						complete : function(){
 							$link.css("display", "block").delay(100).velocity({opacity: 1}, "ease", 500);
 							$link.on('click', function(){
@@ -283,7 +293,7 @@
 		Fonction pour cacher l'intro et afficher la page
 		**/
 		leaveIntroAndEnterPortfolio : function() {
-	
+
 			this.currentPage = "#works";
 
 			window.location.hash = "#works";
@@ -293,16 +303,16 @@
 				{ duration:250, easing:"ease", complete: function(){
 
 						$(this).remove();
-							
+
 						$header.find("nav li:first").addClass("active");
-						
+
 						$header.css("display", "block").velocity({"top":0}, 200, "linear");
-						
+
 						$("#works").css("display", "block").velocity({opacity:1}, {duration:500, delay:100 });
 
 					}
 				}
-			);	
+			);
 
 		},
 
@@ -333,13 +343,13 @@
 			// Si introduction visible ou prête à être affichée, recentrage verticle de celle-ci
 			if($intro.length != 0){
 				var introTopPosition = ($(window).height() - $intro.height())/2;
-				$intro.css("top", introTopPosition); 
+				$intro.css("top", introTopPosition);
 			}
 
 			// Redimensionnement des container des miniatures des projets
 			$(".works .work-thumb").height($(".works .work-thumb").width());
 
-			// Sur tablette/mobile, si le menu était ouvert, on le réaffiche
+			// Lorsqu'on passe du desktop au tablette/mobile, si le menu était ouvert, on le réaffiche
 			if( windowWidth <= 768){
 				if($(".toggle").hasClass("on")){
 					$nav.css("display", "block");
@@ -352,7 +362,7 @@
 		},
 
 
-		/** 
+		/**
 		Fonction pour afficher une page
 		**/
 		showPage : function( page ){
@@ -369,33 +379,27 @@
 			});
 
 			// L'utilisateur affiche une page directement sans voir l'introduction
-			if($intro.is(":visible") > 0){
-
-				console.log("test");
+			if($intro.is(":visible")){
 
 				// On supprime l'introduction
 				$intro.remove();
 
 				// On affiche le header puis la page indiquée dans l'url
 				$header.css("display", "block").velocity(
-					{"top":0}, 
+					{"top":0},
 					{ duration : 1000, delay : 200, easing : "ease", complete : function(){
 							$(page).css("display", "block").velocity({opacity:1}, 1000, "ease");
 							self.currentPage = page;
 						}
 					}
 				);
-			
+
 			}
-			// Introduction déjà montrée, on cache la page courante 
+			// Introduction déjà montrée, on cache la page courante
 			else{
-				console.log(self.currentPage);
 				$(self.currentPage).velocity({ scale : 0.95, opacity : 0 }, 200, function(){
-					console.log(self.currentPage);
 					$(this).css({"display": "none"}).velocity({scale : 1 }, 0, function(){
-						console.log(self.currentPage);
 						self.currentPage = page;
-						console.log(self.currentPage);
 						$(self.currentPage).css("display", "block").velocity({opacity:1}, 250);
 					});
 				});
@@ -408,7 +412,7 @@
 		},
 
 
-		/** 
+		/**
 		Fonction qui se lance lorsqu'un projet a été sélectionné
 		**/
 		chooseWork : function( workId ){
@@ -438,12 +442,12 @@
 				if(!work.allImagesLoaded){ // Si les images du projet n'ont jamais été chargées
 					// on remonte le header dynamiquement en 0.4s, la progress bar sera affichée ensuite pour indiquer le chargement des images
 					$header.velocity(
-						{"top": -headerHeight}, 
+						{"top": -headerHeight},
 						{ duration : 400, delay : 500, easing :"ease", complete :function(){ self.updateWorkPage(work); }}
 					);
 				}else{ //si les images du projet n'ont pas encore été chargées
 					setTimeout(function(){
-						self.updateWorkPage(work)}, 
+						self.updateWorkPage(work)},
 					time);
 				}
 			}
@@ -467,7 +471,7 @@
 			// Mise à jour du lien vers le site/github
 		 	$url.html("");
 		 	$icon.removeClass("fa-link fa-github ");
-		 	
+
 		 	if(work.url[1].length!=0){	// si l'url est indiqué
 				$url.attr("href", work.url[1]);
 
@@ -495,7 +499,7 @@
 			var prevWork = (id == 1) ? works[works.length-1] : works[id-2];
 			$singleWork.find("#previous-work .legend-arrow span").html(prevWork.title);
 			$singleWork.find("#previous-work").attr({"data-id" : prevWork.id, href : "#works/"+prevWork.name});
-			
+
 			// Mise à jour du lien "projet suivant"
 			var nextWork = (id == works.length) ? works[0] : works[id];
 			$singleWork.find("#next-work .legend-arrow span").html(nextWork.title);
@@ -507,7 +511,7 @@
 
 		},
 
-		/**	
+		/**
 		Objet permettant de charger les images liés à un projet
 		**/
 		workPicturesUploader : {
@@ -546,7 +550,7 @@
 						$(image).one("load", this.addImage(title, url));
 					}
 				}
-			}, 
+			},
 
 			/**
 			Fonction pour afficher l'image une fois chargée
@@ -576,28 +580,28 @@
 			updateProgressBar : function(){
 
 				var self = this,
-					loadedImages = self.loadedImages, 
+					loadedImages = self.loadedImages,
 					countedImages = self.countedImages;
 
 				$('.progress-bar')
 				.velocity("stop")
 				.velocity(
-					{'width' : (loadedImages/countedImages)*100 + '%'}, 
-					300, 
+					{'width' : (loadedImages/countedImages)*100 + '%'},
+					300,
 					"ease",
 					function(){
 						if(loadedImages == countedImages){
 							Portfolio.works[self.work.id-1].allImagesLoaded = true;
 							$(this).velocity(
-								{'top' : '-10px'}, 
-								{ 	
+								{'top' : '-10px'},
+								{
 									complete:function(){
 										Portfolio.showPageSingleWork();
 										$header.css("top", -headerHeight); // Cas où les images étaient déjà chargées
 									}
 								}
 							);
-						}	
+						}
 					}
 				);
 			}
@@ -606,18 +610,18 @@
 		showPageSingleWork : function(){
 
 			var self = this;
-			
+
 			$header.velocity({"opacity":"0"}, 200, "easeInSine");
 			$works.velocity({"opacity":"0"}, 200, "easeInSine");
-			
+
 			if($(window).width()>768){ // Si on est sur desktop, activation de scroll reveal
-				window.scrollReveal.init(true); 
+				window.scrollReveal.init(true);
 			}
 
 			$("#single-work")
 			.css({"display" : "block"})
 			.velocity({scale:1, opacity:1}, 400, "easeInSine");
-	
+
 		},
 
 		closePageSingleWork : function(){
@@ -641,7 +645,7 @@
 				skillbars = $('.skillbar'),
 				$skillsTitle = $("#skills-title"),
 				skillsTitlePosition = $skillsTitle.offset().top - parseInt($skillsTitle.css("padding-top"));
-					
+
 			skillbars.each(function(){
 				$(this).find('.skillbar-bar').velocity("stop").css({"width":"0%"});
 			});
@@ -649,11 +653,14 @@
 			$window.on('scroll', function(){
 
 				if($(window).scrollTop() >= skillsTitlePosition && animationDone == false){
-					
+
 					skillbars.each(function(){
-						$(this).find('.skillbar-bar').velocity( 
-							{ width:$(this).attr('data-percent')+"%"
-						}, 5000, "ease");
+						$(this).find('.skillbar-bar').velocity({
+									width: $(this).data('percent')+"%"
+								},
+									5000,
+									"ease"
+								);
 					});
 
 					animationDone = true;
@@ -666,7 +673,7 @@
 	/**********************************************/
 	/********     FIN OBJET PORTFOLIO     *********/
     /**********************************************/
-	
+
 
 	/**********************************************/
 	/*************     OBJET WORK     *************/
@@ -695,7 +702,7 @@
 	/**********************************************/
 	/***********     FIN OBJET WORK     ***********/
     /**********************************************/
-	
+
 
 
 	/**********************************************/
@@ -727,7 +734,7 @@
 
 
 			self.form.on("submit", function(e){
-		
+
 				e.preventDefault();
 
 				var valid_form = self.name.val().length > 1 && self.emailReg.test(self.mail.val()) && self.message.val()!="";
@@ -784,7 +791,7 @@
 				url : this.form.attr("action"),
 				data : this.form.serialize(),
 				dataType : 'json',
-				success : function( json ){	
+				success : function( json ){
 					$('.form-notif').addClass("green").hide().html(json.response).slideDown("slow").delay(2000).slideUp("slow", function(){
 						$('.form-notif').removeClass("green").html("");
 					});
@@ -795,7 +802,7 @@
 				},
 				error : function( result, statut, error ){
 					$('.form-notif').addClass("red").html("An error has occured. Please try again.").slideDown("slow").delay(2000).slideUp().removeClass("red").html("");
-				}	
+				}
 			});
 		}
 	}

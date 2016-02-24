@@ -4,7 +4,7 @@
 
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, 
+fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
 	margin: 0;
 	padding: 0;
@@ -16,7 +16,7 @@ figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, su
 
 /*HTML5 display-role reset for older browsers */
 
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
@@ -42,6 +42,14 @@ html, body{
 	font-size: 100%;
 }
 
+html{
+	/*overflow: hidden;*/
+}
+
+body{
+	overflow: auto;
+}
+
 body *{
 	box-sizing:border-box;
 	font-family: 'Lato';
@@ -56,6 +64,7 @@ h1, h2, h3{
 	text-align: center;
 	margin: 0 auto;
 	text-transform: uppercase;
+	color: #66cc99;
 }
 
 a{
@@ -64,7 +73,6 @@ a{
 }
 
 p{
-	font-family: 'Open Sans';
 	font-size: .95em;
 	margin-bottom: 26px;
 	font-weight: 400;
@@ -248,7 +256,7 @@ input:-webkit-autofill {
 @-webkit-keyframes arrowDownBouncing{
     from{
         margin-top: 20px;
-        opacity: 1;   
+        opacity: 1;
     }
     to{
         margin-top:30px;
@@ -401,18 +409,18 @@ header .toggle{
 	text-align: center;
 	width: 100%;
 	background: none;
-	color: #fff;
 }
 
 .wrapper-works .work-thumb .cache .wrapper-info h3{
 	text-transform: uppercase;
 	font-size: 1.5em;
+	color: #fff;
 }
 
 .wrapper-works .work-thumb .cache .wrapper-info h4{
   	margin-top: 6px;
 	font-size: 1.05em;
-  	
+	color: #fff;
 }
 
 
@@ -442,7 +450,7 @@ header .toggle{
   position: absolute;
   z-index: -1;
   background: #000;
-  cursor: pointer;	
+  cursor: pointer;
   -webkit-transition : all .3s ease;
   -moz-transition : all .3s ease;
   -ms-transition : all .3s ease;
@@ -610,12 +618,12 @@ header .toggle{
 #wrapper-work-info #url a i{
 	margin-left: 6px;
 }
-/* 
+/*
 #wrapper-work-info h4{
 	font-size: 1em;
 	max-width: 240px;
-	margin: 15px auto 0; 
-	text-align: center;	
+	margin: 15px auto 0;
+	text-align: center;
 } */
 
 #information{
@@ -677,7 +685,7 @@ header .toggle{
 }
 
 #wrapper-pictures .picture:last-child{
-	margin-bottom:0; 
+	margin-bottom:0;
 }
 
 .go-to-top{
@@ -707,7 +715,7 @@ header .toggle{
 @-webkit-keyframes arrowUpBouncing{
     from{
         top:10px;
-        opacity: 1;   
+        opacity: 1;
     }
     to{
         top:0px;
@@ -766,7 +774,6 @@ header .toggle{
 #about h3{
   	padding: 40px 0;
   	font-size: 1.7em;
-  	color: #66cc99;
 }
 
 #about #skills-title{
@@ -794,6 +801,7 @@ header .toggle{
   	text-align: right;
 	font-weight: 900;
 	font-size: 1.05em;
+	color: #66cc99;
 }
 
 .skillbar-wrapper{
@@ -803,8 +811,8 @@ header .toggle{
 	height: 30px;
 	position: relative;
 	background-color: #eee;
-	-webkit-border-radius: 20px; 
-	-moz-border-radius: 20px; 
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
 	border-radius: 20px;
 	overflow: hidden;
 }
@@ -821,8 +829,8 @@ header .toggle{
 
 .skillbar-bar{
 	background-color: #66cc99;
-	-webkit-border-radius: 20px; 
-	-moz-border-radius: 20px; 
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
 	border-radius: 20px;
 	height: 30px;
 	position: absolute;
@@ -854,7 +862,7 @@ header .toggle{
 
 .form-notif{
 	margin-bottom: 18px;
-} 
+}
 
 .form{
 	width: 100%;
@@ -1026,6 +1034,7 @@ header .toggle{
 	.wrapper-works .work-thumb .cache{
 		bottom:0;
 		height: 40px;
+		line-height: 40px;
 	}
 
 	.wrapper-works .work-thumb .cache .wrapper-info{
@@ -1048,7 +1057,7 @@ header .toggle{
 /******************************************/
 
 @media screen and (max-width: 768px) {
- 		
+
 	/* General css */
 
 	body{
@@ -1086,7 +1095,8 @@ header .toggle{
 	  -webkit-appearance: none;
 	  -moz-appearance: none;
 	  appearance: none;
-	  display: block;;
+	  display: block;
+		outline: none;
 	}
 
 	header .toggle span:after,
@@ -1152,7 +1162,7 @@ header .toggle{
 	  	width: 100%;
 	  	margin: 0 !important;
 	  	border-top: solid 1px #fff;
-	  	height: initial; 
+	  	height: initial;
  	}
 
  	header nav ul li a{
@@ -1164,7 +1174,7 @@ header .toggle{
  		display: none;
  	}
 
- 	/*** Page works ***/ 
+ 	/*** Page works ***/
 
  	.wrapper-works{
  		padding: 0 10px;
@@ -1174,7 +1184,7 @@ header .toggle{
  		font-size: 1em;
  	}
 
- 	/*** Page single-work ***/ 
+ 	/*** Page single-work ***/
 
  	#single-work{
  		margin-top:15px;
@@ -1226,7 +1236,7 @@ header .toggle{
 
 	#single-work .single-work-navigation #icon-arrow-right{
 		right: 0;
-	}	
+	}
 
 	#single-work #previous-work .legend-mobile{
 		margin-left: 15px;
@@ -1274,7 +1284,7 @@ header .toggle{
 		top: 3px;
 	}
 
- 	/*** Page contact ***/ 
+ 	/*** Page contact ***/
 
  	.form label, .form textarea, .form input:not([type="submit"]){
  		display: block;
@@ -1316,7 +1326,7 @@ header .toggle{
 @media screen and (max-width: 480px) {
 
  	/** General css **/
- 
+
 	body{
 		font-size: 85%;
 	}
@@ -1373,7 +1383,7 @@ header .toggle{
 
 	#previous-work{
 		margin-left: 0;
-		padding-left: 
+		padding-left:
 	}
 
 	#next-work{
@@ -1394,7 +1404,7 @@ header .toggle{
 	.introduction p{
 		font-size: 1.5em;
 	}
- 	
+
  	#about .go-to{
  		margin-top: 30px;
  	}

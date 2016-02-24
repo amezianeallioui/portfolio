@@ -1,5 +1,77 @@
 [
 	{
+		"name" : "room-me",
+		"title" : "Room.me",
+		"role" : "Front-end developer",
+		"context" : "Internship",
+		"skills" : "SASS, BEM CSS, AngularJS, Ruby On Rails",
+		"date" : "July-December '15",
+		"presentation" : "Room.me is a German website, which helps people to search the perfect roommate or find the perfect room, corresponding to their personnality or hobbies, in San Francisco. The main features are answering questions about his/her personnality, posting or finding a room and sending or answering messages to other users. In the context of an internship in this start-up, I helped integrating the new pages or main pages modifications (list of rooms in the area, single room, campaigns of communication), and the new features (inbox, slideshow, add a room to favorites) on the website. I worked with SASS with the BEM CSS, and also AngularJS for the front-end. I also had the occasion to use Ruby On Rails, used for the website's back-end.",
+		"gallery" : [
+			{
+				"title" : "Homepage"
+			},
+			{
+				"title" : "List of rooms in our area, with the score's matching with its owner(s)"
+			},
+			{
+				"title" : "Room's page, with the main informations"
+			},
+			{
+				"title" : "Slideshow with the pictures of the room"
+			},
+			{
+				"title" : "User's inbox, with his/her applications, received answers, send messages"
+			},
+			{
+				"title" : "Conversation's page"
+			}
+		],
+		"url" : {
+			"type" : "site",
+			"content" : "https://www.room.me/"
+		}
+	},
+	{
+		"name" : "adrian-mannarino",
+		"title" : "Adrian Mannarino",
+		"role" : "Front-end developer",
+		"context" : "School project",
+		"skills" : "WordPress, LESS, jQuery",
+		"date" : "March-June '15",
+		"presentation" : "\"adrian-mannarino.com\" is the official website of the French tennis player Adrian Mannarino. In the context of the Rolland Garros Cup, it was important to increase its visibility and popularity during this period.Also, my team (7 people) and I designed and developed a website, which present him and his history, will shows his last tournament results and actuality, allows him to publish article and pictures, and people to contact him. A promotionnal campaign on social networks was also launched to promote the launch of the new website. As the Front-end developer in this project, I integrated the responsive website, using Less, jQuery and TweenMax.js.",
+		"gallery" : [
+			{
+				"title" : "Last results on homepage"
+			},
+			{
+				"title" : "Last 5 articles on homepage"
+			},
+			{
+				"title" : "History of the player, desktop version"
+			},
+			{
+				"title" : "History of the player, mobile version"
+			},
+			{
+				"title" : "Actuality page, desktop version"
+			},
+			{
+				"title" : "Actuality page, mobile version"
+			},
+			{
+				"title" : "Page of an article, desktop version"
+			},
+			{
+				"title" : "Page of an article, mobile version"
+			}
+		],
+		"url" : {
+			"type" : "site",
+			"content" : "http://www.adrianmannarino.com"
+		}
+	},
+	{
 		"name" : "sampleo",
 		"title" : "Sampleo",
 		"role" : "Front-end developer",
@@ -10,27 +82,27 @@
 		"gallery" : [
 			{
 				"title" : "Homepage, desktop version"
-			},			
+			},
 			{
 				"title" : "Homepage, tablet version"
-			},			
+			},
 			{
 				"title" : "Homepage, mobile version"
-			},			
+			},
 			{
 				"title" : "Product page, desktop version"
-			},			
+			},
 			{
 				"title" : "Product page, tablet version"
-			},			
+			},
 			{
 				"title" : "Product page, mobile version"
 			}
 		],
 		"url" : {
 			"type" : "site",
-			"content" : "http://www.sampleo.com" 
-		} 
+			"content" : "http://www.sampleo.com"
+		}
 	},
 	{
 		"name" : "geofarming",
@@ -43,33 +115,33 @@
 		"gallery" : [
 			{
 				"title" : "Homepage"
-			},			
+			},
 			{
 				"title" : "Tutorial"
-			},			
+			},
 			{
 				"title" : "Information on a course"
-			},			
+			},
 			{
 				"title" : "Description of the future application"
-			},			
+			},
 			{
 				"title" : "Modal pop-up for connexion"
-			},			
+			},
 			{
 				"title" : "First step in the creation of a course"
-			},			
+			},
 			{
 				"title" : "Second step in the creation of a course"
-			},			
+			},
 			{
 				"title" : "Last step in the creation of a course"
 			}
 		],
 		"url" : {
 			"type" : "",
-			"content" : "" 
-		} 
+			"content" : ""
+		}
 	},
 	{
 		"name" : "find-it-out",
@@ -82,21 +154,21 @@
 		"gallery" : [
 						{
 				"title" : "Homepage : the user can find and select the places he wants to visit."
-			},			
+			},
 			{
 				"title" : "Instructions of direction show off once the course determinated."
-			},			
+			},
 			{
 				"title" : "User's personal informations in a right sidebar."
-			},			
+			},
 			{
 				"title" : "Description of a place."
 			}
 		],
 		"url" : {
 			"type" : "github",
-			"content" : "https://github.com/Nicolas-th/projet_html" 
-		} 
+			"content" : "https://github.com/Nicolas-th/projet_html"
+		}
 	},
 
 	{
@@ -110,21 +182,21 @@
 		"gallery" : [
 			{
 				"title" : "Homepage"
-			},			
+			},
 			{
 				"title" : "Page of artists"
-			},			
+			},
 			{
 				"title" : "Artist page"
-			},			
+			},
 			{
 				"title" : "Event description"
 			}
 		],
 		"url" : {
 			"type" : "site",
-			"content" : "http://cafeculturel.org" 
-		} 
+			"content" : "http://cafeculturel.org"
+		}
 	},
 
 	{
@@ -138,19 +210,19 @@
 		"gallery" : [
 			{
 				"title" : "Homepage"
-			},			
+			},
 			{
 				"title" : "Product page"
-			},			
+			},
 			{
 				"title" : "Category page"
-			},			
+			},
 			{
 				"title" : "Description of the shop"
-			},			
+			},
 			{
 				"title" : "My cart page"
-			},			
+			},
 			{
 				"title" : "Connexion page"
 			}
@@ -158,8 +230,8 @@
 		],
 		"url" : {
 			"type" : "",
-			"content" : "" 
-		} 
+			"content" : ""
+		}
 	}
 
 ]
