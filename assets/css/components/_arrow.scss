@@ -1,0 +1,33 @@
+.icon-arrow-down {
+	margin:20px auto 0;
+	display: block;
+	width:19px;
+	height:26px;
+	background-position: 19px 0;
+	position: absolute;
+	left: calc(50% - 12px);
+}
+
+.arrow {
+	background-image:url(../img/arrows.png);
+}
+
+@keyframes arrowDownBouncing {
+		from{
+				margin-top: 20px;
+				opacity: 1;
+		}
+		to{
+				margin-top: 30px;
+				opacity: 0;
+		}
+}
+
+.go-to:hover .icon-arrow-down,
+.icon-arrow-down:hover{
+	animation: arrowDownBouncing .7s linear infinite;
+}
+
+#scroll-arrow{
+	animation: arrowDownBouncing .7s linear infinite;
+}

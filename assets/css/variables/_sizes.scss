@@ -1,0 +1,39 @@
+// --- Media queries --------------------------------------
+
+// Variables
+$break--desktop: 1024px;
+$break--tablet: 768px;
+$break--mobile: 480px;
+$break--mobile-small: 320px;
+
+// Mixins
+
+@mixin desktop-only {
+  @media all and (min-width: $break--desktop) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media all and (max-width: $break--desktop) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media all and (max-width: $break--tablet) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media all and (max-width: $break--mobile) {
+    @content;
+  }
+}
+
+@mixin mobile-small {
+  @media all and (max-width: $break--mobile-small) {
+    @content;
+  }
+}

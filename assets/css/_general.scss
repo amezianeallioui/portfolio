@@ -1,0 +1,86 @@
+*  {
+	margin: 0;
+	padding: 0;
+}
+
+html,
+body  {
+	height: 100%;
+	width: 100%;
+	line-height: 1.2;
+	font-size: 100%;
+}
+
+body {
+	overflow: auto;
+
+	@include tablet  {
+		font-size: 90%;
+	}
+
+	@include mobile {
+		font-size: 85%;
+	}
+}
+
+body *  {
+	box-sizing:border-box;
+	font-family: 'Lato';
+}
+
+section {
+	z-index:9997;
+	width: 100%;
+	display: none;
+	opacity: 0;
+}
+
+a, h1, h2, h3, h4 {
+	font-weight: 800;
+}
+
+h1, h2, h3 {
+	display: block;
+	text-align: center;
+	margin: 0 auto;
+	text-transform: uppercase;
+	color: $color--turquoise;
+}
+
+h1 {
+	font-size: 2.2em;
+	padding-top: 80px;
+	padding-bottom: 40px;
+}
+
+p {
+	font-size: .95em;
+	margin-bottom: 26px;
+	font-weight: 400;
+}
+
+a {
+	text-decoration: none;
+	color: #000;
+}
+
+ul {
+	list-style: none;
+}
+
+label,
+input,
+textarea {
+	-webkit-appearance: none !important;
+	-moz-appearance: none !important;
+
+	// ATTENTION : OUTLINE NECESSAIRE POUR L'ACCESSIBILITE
+	&:focus {
+		outline: none;
+	}
+}
+
+/* Remove yellow background on Chrome for autocompleted fields */
+input:-webkit-autofill  {
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+}

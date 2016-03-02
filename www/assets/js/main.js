@@ -1,13 +1,14 @@
 (function($) {
 
 	var $window = $(window),
-		$header = $("header"),
-		$intro = $(".introduction"),
+		$header = $(".header"),
+		$toggle = $('.header__toggle'),
+		$intro = $(".intro"),
 		$about = $("#about"),
-		$works = $("#works"),
+		$works = $(".works"),
 		$singleWork = $("#single-work"),
 		$contact = $("#contact"),
-		headerHeight = $header.outerHeight(),
+		headerHeight = $header.outerHeight(true),
 		links = ["#about", "#works", "#contact"],
 		configScrollreveal = {
 			init: false,
@@ -52,10 +53,10 @@
 			if( $.inArray(link , links) != -1 && link != Portfolio.currentPage){
 
 				// Si on est sur tablette ou mobile
-				if($(window).width() <= 768){
+				if($window.width() <= 768){
 					// On referme le menu dépliant s'il est ouvert
 					$("nav").slideUp(function(){
-						$(".toggle").removeClass("on");
+						$toggle.removeClass("on");
 						Portfolio.showPage(link);
 					});
 				}else{
@@ -126,19 +127,19 @@
 			});
 
 			// Ecouteur de clique sur le bouton "toggle" pour ouvrir ou fermer le menu
-			$(".toggle").on('click', function(){
+			$toggle.on('click', function(){
 				$(this).toggleClass("on");
 				$("nav").slideToggle();
 			});
 
 			// Clic sur le bouton pour fermer la page "single-work"
-			$(".close").on('click', function(){
+			$(".single__close").on('click', function(){
 				self.closePageSingleWork();
 			});
 
 			$header.css("top", -headerHeight);
 
-			$("section:not(#single-work)").css("padding-top", headerHeight);
+			$("section:not(#single-work, .intro)").css("padding-top", headerHeight);
 
 			// Initialisation de l'objet Form (formulaire)
 			Form.init();
@@ -164,25 +165,25 @@
 	    loadWorkThumbnail : function( i ) {
 
 	    	var work = this.works[i],
-	    		self = this,
-	    		$image = $('<img alt="'+work.title+'" src="assets/img/'+ work.name +'/thumb.jpg">');
+		    		self = this,
+		    		$image = $('<img class="work-thumb__picture" alt="'+work.title+'" src="assets/img/'+ work.name +'/thumb.jpg">');
 
 	    	// Chargement de la miniature
-	    	$image.load(function(){
+	    	$image.load(function() {
 
-				// Une fois l'image chargée, création du lien vers le projet
-				var $workThumb = $('<a class="work-thumb" href="#works/'+work.name+'" data-id="'+work.id +'"><div class="cache"><div class="wrapper-info"><h3>'+ work.title +'</h3><h4 class="role">'+work.role+'</h4></div></div></a>');
+					// Une fois l'image chargée, création du lien vers le projet
+					var $workThumb = $('<a class="work-thumb" href="#works/'+work.name+'" data-id="'+work.id +'"><div class="work-thumb__overlay"><div class="work-thumb__content"><h3 class="work-thumb__title">'+ work.title +'</h3><h4 class="work-thumb__role">'+work.role+'</h4></div></div></a>');
 
-				// Ajout de l'image dans le lien
-				$workThumb.find(".cache").before($(this));
-				// Ajout du lien dans la page "works"
-				$workThumb.appendTo(".wrapper-works");
+					// Ajout de l'image dans le lien
+					$workThumb.find(".work-thumb__overlay").before($(this));
+					// Ajout du lien dans la page "works"
+					$workThumb.appendTo(".works__wrapper");
 
-				// On incrémente le nombre de projets chargés et prêts
+					// On incrémente le nombre de projets chargés et prêts
 		    	self.loadedWorks++;
 
 		    	// On augmente la largeur de la progressbar
-	    		$('.progress-bar')
+	    		$('.progress-bar__progression')
 	    		.velocity("stop")
 	    		.velocity(
 					{"width" : (self.loadedWorks/self.countedWorks)*100 + '%'
@@ -265,11 +266,11 @@
 		showIntro : function(){
 
 			var self = this,
-				$photoProfil = $intro.find(".profil"),
-				$textIntro = $intro.find("p"),
-				$link = $intro.find("#enter-portfolio");
+				$photoProfil = $intro.find(".intro__picture"),
+				$textIntro = $intro.find(".intro__text"),
+				$link = $intro.find(".intro__cta");
 
-			$(window).trigger("resize");
+			$window.trigger("resize");
 
 			$photoProfil.velocity({marginTop:0, opacity: 1}, 500, "ease", function(){
 				$textIntro.velocity(
@@ -335,28 +336,28 @@
 		resizedWindow : function(){
 
 			var windowWidth  = $window.width(),
-				$workThumb   = $(".wrapper-works .work-thumb"),
-				$wrapperInfo = $workThumb.find(".wrapper-info"),
-				$nav  = $("nav")
-				wrapperInfoHeight = 50;
+					$workThumb   = $(".works .work-thumb"),
+					$wrapperInfo = $workThumb.find(".work-thumb__content"),
+					$nav  = $("nav")
+					wrapperInfoHeight = 50;
 
 			// Si introduction visible ou prête à être affichée, recentrage verticle de celle-ci
 			if($intro.length != 0){
-				var introTopPosition = ($(window).height() - $intro.height())/2;
+				var introTopPosition = ($window.height() - $intro.height())/2;
 				$intro.css("top", introTopPosition);
 			}
 
 			// Redimensionnement des container des miniatures des projets
-			$(".works .work-thumb").height($(".works .work-thumb").width());
+			// $(".works .work-thumb").height($window.width() * $(".works .work-thumb").width() / 100);
 
 			// Lorsqu'on passe du desktop au tablette/mobile, si le menu était ouvert, on le réaffiche
 			if( windowWidth <= 768){
-				if($(".toggle").hasClass("on")){
+				if($toggle.hasClass("on")) {
 					$nav.css("display", "block");
-				}else{
+				} else {
 					$nav.css("display", "none");
 				}
-			}else{// Sur desktop, le menu est toujours visible
+			} else {// Sur desktop, le menu est toujours visible
 				$nav.css("display", "block");
 			}
 		},
@@ -461,12 +462,12 @@
 
 			var id = work.id,
 				works = this.works,
-				$url = $singleWork.find("#url a"),
-				$icon = $("<i></i>");
+				$url = $singleWork.find(".single__url-name"),
+				$icon = $('<span class="single__url-icon"></i>');
 
 			window.location.hash = "#works/"+work.name;
 
-		 	$singleWork.find("h2").html(work.title);  // Mise à jour du titre
+		 	$singleWork.find(".single__title").html(work.title);  // Mise à jour du titre
 
 			// Mise à jour du lien vers le site/github
 		 	$url.html("");
@@ -497,12 +498,12 @@
 
 			// Mise à jour du lien "projet précédent"
 			var prevWork = (id == 1) ? works[works.length-1] : works[id-2];
-			$singleWork.find("#previous-work .legend-arrow span").html(prevWork.title);
+			$singleWork.find("#previous-work .single__link-label").html(prevWork.title);
 			$singleWork.find("#previous-work").attr({"data-id" : prevWork.id, href : "#works/"+prevWork.name});
 
 			// Mise à jour du lien "projet suivant"
 			var nextWork = (id == works.length) ? works[0] : works[id];
-			$singleWork.find("#next-work .legend-arrow span").html(nextWork.title);
+			$singleWork.find("#next-work .single__link-label").html(nextWork.title);
 			$singleWork.find("#next-work").attr({"data-id" : nextWork.id, href : "#works/"+nextWork.name});
 
 			// Affichage des images liées au projet
@@ -558,7 +559,7 @@
 			addImage : function( title, url ){
 
 				var self = this,
-					$wrapperImage = $('<div class="picture" data-sr="enter left move 50px over 1s"><h5>'+title+'</h5><img src="'+url+'" alt="'+title+'" /></div>');
+					$wrapperImage = $('<div class="picture" data-sr="enter left move 50px over 1s"><h5 class="picture__title">'+title+'</h5><img class="picture__src" src="'+url+'" alt="'+title+'" /></div>');
 
 				$wrapperImage.appendTo($("#wrapper-pictures"));
 
@@ -583,7 +584,7 @@
 					loadedImages = self.loadedImages,
 					countedImages = self.countedImages;
 
-				$('.progress-bar')
+				$('.progress-bar__progression')
 				.velocity("stop")
 				.velocity(
 					{'width' : (loadedImages/countedImages)*100 + '%'},
@@ -614,7 +615,7 @@
 			$header.velocity({"opacity":"0"}, 200, "easeInSine");
 			$works.velocity({"opacity":"0"}, 200, "easeInSine");
 
-			if($(window).width()>768){ // Si on est sur desktop, activation de scroll reveal
+			if($window.width()>768){ // Si on est sur desktop, activation de scroll reveal
 				window.scrollReveal.init(true);
 			}
 
@@ -642,20 +643,20 @@
 		animateSkillbars : function(){
 
 			var animationDone = false,
-				skillbars = $('.skillbar'),
-				$skillsTitle = $("#skills-title"),
+				skillbars = $('.skill'),
+				$skillsTitle = $(".about .about__title"),
 				skillsTitlePosition = $skillsTitle.offset().top - parseInt($skillsTitle.css("padding-top"));
 
 			skillbars.each(function(){
-				$(this).find('.skillbar-bar').velocity("stop").css({"width":"0%"});
+				$(this).find('.skill__bar').velocity("stop").css({"width":"0%"});
 			});
 
 			$window.on('scroll', function(){
 
-				if($(window).scrollTop() >= skillsTitlePosition && animationDone == false){
+				if($window.scrollTop() >= skillsTitlePosition && !animationDone){
 
-					skillbars.each(function(){
-						$(this).find('.skillbar-bar').velocity({
+					skillbars.each(function() {
+						$(this).find('.skill__bar').velocity({
 									width: $(this).data('percent')+"%"
 								},
 									5000,
@@ -792,8 +793,8 @@
 				data : this.form.serialize(),
 				dataType : 'json',
 				success : function( json ){
-					$('.form-notif').addClass("green").hide().html(json.response).slideDown("slow").delay(2000).slideUp("slow", function(){
-						$('.form-notif').removeClass("green").html("");
+					$('.form-notif').addClass("u-c-green").hide().html(json.response).slideDown("slow").delay(2000).slideUp("slow", function(){
+						$('.form-notif').removeClass("u-c-green").html("");
 					});
 
 					$name.val("");
@@ -801,7 +802,14 @@
 					$message.val("");
 				},
 				error : function( result, statut, error ){
-					$('.form-notif').addClass("red").html("An error has occured. Please try again.").slideDown("slow").delay(2000).slideUp().removeClass("red").html("");
+					$('.form-notif')
+						.addClass("u-c-red")
+						.html("An error has occured. Please try again.")
+						.slideDown("slow")
+						.delay(2000)
+						.slideUp()
+						.removeClass("u-c-red")
+						.html("");
 				}
 			});
 		}

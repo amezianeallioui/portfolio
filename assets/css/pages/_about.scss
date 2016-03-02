@@ -1,0 +1,33 @@
+.about {
+	&__title {
+	  	padding: 40px 0;
+	  	font-size: 1.7em;
+
+			&--skills {
+				padding-bottom: 10px;
+
+				@include tablet {
+					padding-bottom: 10px;
+				}
+
+				@include mobile {
+					padding-bottom: 0;
+				}
+			}
+	}
+
+	&__subtitle {
+	  display: block;
+	  text-align: center;
+	  font-size: 1.2em;
+	  padding-top: 50px;
+	  padding-bottom: 15px;
+	  color: $color--grey;
+		text-transform: none;
+	}
+
+	&__paragraph {
+		margin-bottom: 26px;
+		line-height: 1.4;
+	}
+}

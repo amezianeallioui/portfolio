@@ -1,0 +1,91 @@
+.header {
+	margin: 0 auto;
+	padding : 15px 60px;
+	z-index:9998;
+	width: 100%;
+	background-color: $color--turquoise;
+	display: none;
+	font-size: 1.05em;
+	position: fixed;
+
+  &__name{
+	   text-transform: uppercase;
+	   color: #fff;
+	   vertical-align: middle;
+	   display: inline-block;
+	}
+
+	&__toggle {
+		display: none;
+		width: 28px;
+		height: 30px;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		background: none;
+		float: right;
+		cursor: pointer;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		outline: none;
+
+		span {
+			position: relative;
+			display: block;
+			width: 100%;
+			height: 5px;
+			background-color: #fff;
+			transition: all 0.3s;
+			backface-visibility: hidden;
+			border-radius: 2px;
+
+			&:after,
+			&:before {
+				content: "";
+				position: absolute;
+				left: 0;
+				top: -9px;
+				width: 100%;
+				height: 5px;
+				background-color: #fff;
+				transition: all 0.3s;
+				backface-visibility: hidden;
+				border-radius: 2px;
+			}
+
+			&:after{
+				top: 9px;
+			}
+		}
+
+		/* on activation */
+		&.on {
+			span {
+				background-color: transparent;
+
+				&:before {
+					transform: rotate(45deg) translate(5px, 5px);
+				}
+
+				&:after {
+					transform: rotate(-45deg) translate(7px, -8px);
+				}
+			}
+		}
+	}
+}
+
+@include tablet {
+ 	.header {
+ 		padding: 8px 30px;
+
+		&__name{
+   		margin-top: 6px;
+    	padding: 0;
+   	}
+
+		&__toggle {
+			display: block;
+		}
+ 	}
+}

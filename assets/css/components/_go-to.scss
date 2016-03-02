@@ -1,0 +1,77 @@
+.go-to  {
+  margin: 40px auto 0;
+  display: block;
+  width: auto;
+  cursor: pointer;
+  text-align: center;
+}
+
+.go-to--about {
+  font-size: 1.05em;
+  padding-bottom: 40px;
+  height: 100px;
+
+  .icon-arrow-down{
+  	position: initial;
+  }
+
+  @include mobile-small {
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+	.go-to {
+		margin-top: 40px;
+	}
+}
+
+
+@media (max-width: 320px) {
+	.go-to  {
+ 		margin-top: 50px;
+ 		font-size: 1.2em;
+ 	}
+}
+
+// go to top
+
+.go-to-top{
+	max-width: 100px;
+	margin: 0 auto;
+	position: relative;
+	height: 80px;
+}
+
+.go-to-top #icon-arrow-top{
+	display: block;
+	width:19px;
+	height:26px;
+	background-position: 0 0;
+	text-align: center;
+	position: absolute;
+	left: calc(50% - 9px);
+	top:10px;
+}
+
+.go-to-top .legend-go-to-top{
+	position: absolute;
+	left: 17%;
+	top:50px;
+	padding-bottom:40px;
+}
+
+@keyframes arrowUpBouncing{
+    from{
+       top:10px;
+        opacity: 1;
+    }
+    to{
+        top:0px;
+        opacity: 0;
+    }
+}
+
+.go-to-top:hover #icon-arrow-top{
+	animation: arrowUpBouncing .7s linear infinite;
+}

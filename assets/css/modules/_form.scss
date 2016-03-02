@@ -1,0 +1,109 @@
+.form {
+	width: 100%;
+	display: block;
+
+	&__notif {
+		margin-bottom: 18px;
+	}
+
+	&__field {
+		margin-bottom: 10px;
+	}
+
+	&__label {
+		display: inline-block;
+		width: 70px;
+		text-align: right;
+	}
+
+	&__textarea{
+		padding-left: 0;
+		padding-right: 0;
+		padding-bottom: 0;
+		vertical-align: middle;
+		overflow: hidden;
+	}
+
+	&__text,
+	&__textarea {
+		display: inline-block;
+		width: 250px;
+		max-width: 250px;
+		height: 25px;
+		margin-left: 10px;
+		border: solid 1px #333;
+		-webkit-border-radius: 2px;
+		border-radius: 2px;
+		font-size: 1em;
+
+		&:focus {
+			border-color:#000;
+		}
+
+		&.error{
+			border-color: $color--red !important;
+		}
+	}
+
+	&__text,
+	&__textarea,
+	&__submit {
+		padding-left: 3px;
+		transition: border .3s ease, color .3s ease;
+	}
+
+	&__textarea {
+		height: 100px;
+		border-bottom: 1px solid #000;
+	}
+
+	&__submit {
+		border: 0;
+		cursor: pointer;
+		margin-top: 20px;
+		font-size: 1.2em;
+		font-weight: bold;
+		background-color: $color--turquoise;
+		padding: 10px;
+		color: #fff;
+		width: 100px;
+		opacity: 1;
+		transition: all 0.3s ease;
+
+		&:hover {
+			opacity: 0.8;
+		}
+	}
+}
+
+@include tablet {
+
+ 	.form {
+		&__label,
+		&__textarea,
+		&__text {
+			display: block;
+			max-width: 100%;
+			margin-left: 0;
+			margin-right: 0;
+			width: 100%;
+		}
+
+		&__label {
+			height: auto;
+			margin-top: 15px;
+			text-align: left;
+		}
+
+		&__input {
+			width: 100%;
+			padding: 0;
+			max-width: initial;
+			margin: 0;
+		}
+
+		&__textarea {
+			height: 50px;
+		}
+	}
+}

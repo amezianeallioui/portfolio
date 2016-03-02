@@ -1,0 +1,42 @@
+/*********************************************************************/
+/* CONTACT                                                           */
+/*********************************************************************/
+
+.contact {
+	&__cv {
+		color:#000;
+		font-size: 1.1em;
+		transition: color 0.3s ease;
+
+		&:hover {
+			color:$color--turquoise;
+		}
+	}
+
+	&__links {
+		margin: 40px 0 15px;
+	}
+
+	&__link {
+		transition: all 0.3s ease;
+		font-size: 2.4em;
+
+		&:hover {
+			opacity: 0.7;
+		}
+
+		&--twitter {
+			color: $color--twitter;
+			opacity: 1
+		}
+
+		&--linkedin {
+			color: $color--linkedin;
+			margin: 0 20px;
+		}
+
+		&--mail {
+			color: $color--grey;
+		}
+	}
+}

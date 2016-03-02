@@ -1,0 +1,67 @@
+.skill {
+	margin-top: 15px;
+
+	&__title {
+  	float: left;
+  	width: 18%;
+  	margin-right: 2%;
+  	margin-top: 4px;
+  	text-align: right;
+		font-weight: 900;
+		font-size: 1.05em;
+		color: $color--turquoise;
+	}
+
+	&__wrapper {
+		display: inline-block;
+		vertical-align: middle;
+		width: 80%;
+		height: 30px;
+		position: relative;
+		background-color: #eee;
+		border-radius: 20px;
+		overflow: hidden;
+	}
+
+	&__percent {
+		position: absolute;
+		top: 5px;
+		left: 12px;
+		display: block;
+		z-index: 1;
+		font-weight: 900;
+		color: #fff;
+	}
+
+	&__bar {
+		background-color: $color--turquoise;
+		border-radius: 20px;
+		height: 30px;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+}
+
+@include tablet {
+	.skill {
+		&__title,
+		&__wrapper {
+			float: none;
+			display: block;
+			width: 100%;
+			margin-right: 0;
+			margin-top: 5px;
+			text-align: left;
+		}
+
+		&__bar,
+		&__wrapper{
+			height: 20px;
+		}
+
+		&__percent{
+  		top: 3px;
+  	}
+	}
+}
