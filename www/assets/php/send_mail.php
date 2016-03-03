@@ -2,7 +2,7 @@
 
 if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['message'])){
 	
-	$name = $_POST['name'];
+	$name = $_POST['first-name'];
 	$email = $_POST['email'];
 	$to = "ameziane.allioui@gmail.com";
 	$subject = "Portfolio : mail de ".$name;

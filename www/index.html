@@ -83,8 +83,10 @@
 
 	<!-- Start Works -->
 	<section id="works" class="works">
+		
 		<h1 class="works__title">My works</h1>
-		<div class="works__wrapper"></div>
+		<div id="list-works" class="u-contentWrapper"></div>
+		
 	</section>
 	<!-- Works End -->
 
@@ -112,9 +114,9 @@
 		</a>
 
 		<!-- Start Informations on the work-->
-		<div id="wrapper-work-info" class="single__intro">
+		<div class="single__intro" id="wrapper-work-info">
 			<h1 class="single__title"></h1>
-			<div id="url" class="single__url"><a class="u-c-turquoise"></a></div>
+			<div class="single__url" id="url"><a class="u-c-turquoise"></a></div>
 
 			<p class="single__info">Role : <span id="role" class="u-c-turquoise"></span></p>
 			<p class="single__info">Context : <span id="context" class="u-c-turquoise"></span></p>
@@ -144,7 +146,7 @@
 	<!-- Start About -->
 	<section id="about" class="about">
 
-		<div class="u-contentWrapper u-contentWrapper--about">
+		<div class="u-contentWrapper u-contentWrapper--about u-ta-justify">
 
 			<h1>About me</h1>
 			<h2 class="about__title">Who I am ?</h2>
@@ -314,7 +316,7 @@
 				<div class="form__notif"></div>
 				<div class="form__field">
 					<label class="form__label" for="form-name">Name*</label>
-					<input class="form__text" type="text" name="name" id="form-name" />
+					<input class="form__text" type="text" name="first-name" id="form-name" />
 				</div>
 				<div class="form__field">
 					<label class="form__label" for="form-email">Email*</label>

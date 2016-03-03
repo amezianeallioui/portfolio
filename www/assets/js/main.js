@@ -177,7 +177,7 @@
 					// Ajout de l'image dans le lien
 					$workThumb.find(".work-thumb__overlay").before($(this));
 					// Ajout du lien dans la page "works"
-					$workThumb.appendTo(".works__wrapper");
+					$workThumb.appendTo("#list-works");
 
 					// On incrémente le nombre de projets chargés et prêts
 		    	self.loadedWorks++;
@@ -462,8 +462,8 @@
 
 			var id = work.id,
 				works = this.works,
-				$url = $singleWork.find(".single__url-name"),
-				$icon = $('<span class="single__url-icon"></i>');
+				$url = $singleWork.find(".single__url a"),
+				$icon = $('<span class="single__icon fa"></span>');
 
 			window.location.hash = "#works/"+work.name;
 
@@ -471,7 +471,7 @@
 
 			// Mise à jour du lien vers le site/github
 		 	$url.html("");
-		 	$icon.removeClass("fa-link fa-github ");
+		 	$icon.removeClass("fa-link fa-github");
 
 		 	if(work.url[1].length!=0){	// si l'url est indiqué
 				$url.attr("href", work.url[1]);
@@ -479,12 +479,12 @@
 				if(work.url[0] == "site")
 				{
 					$url.html("See the site");
-					$icon.addClass("fa fa-link fa-lg");
+					$icon.addClass("fa-link fa-lg");
 				}
 				else if(work.url[0] == "github")
 				{
 					$url.html("Go to Github repository");
-					$icon.addClass("fa fa-github fa-lg");
+					$icon.addClass("fa-github fa-lg");
 				}
 
 				$icon.appendTo($url);
@@ -532,7 +532,7 @@
 				this.loadedImages = 0;
 				this.allImagesLoaded = work.allImagesLoaded;
 
-				$(".progress-bar").css({"display": "block", "top":"0", "width":"0"});
+				$(".progress-bar__progression").css({"display": "block", "top":"0", "width":"0"});
 
 				var pictures = this.work.gallery;
 
@@ -793,8 +793,8 @@
 				data : this.form.serialize(),
 				dataType : 'json',
 				success : function( json ){
-					$('.form-notif').addClass("u-c-green").hide().html(json.response).slideDown("slow").delay(2000).slideUp("slow", function(){
-						$('.form-notif').removeClass("u-c-green").html("");
+					$('.form__notif').addClass("u-c-green").hide().html(json.response).slideDown("slow").delay(2000).slideUp("slow", function(){
+						$('.form__notif').removeClass("u-c-green").html("");
 					});
 
 					$name.val("");
@@ -802,7 +802,7 @@
 					$message.val("");
 				},
 				error : function( result, statut, error ){
-					$('.form-notif')
+					$('.form__notif')
 						.addClass("u-c-red")
 						.html("An error has occured. Please try again.")
 						.slideDown("slow")
