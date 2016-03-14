@@ -8,7 +8,7 @@
 		$works = $(".works"),
 		$singleWork = $("#single-work"),
 		$contact = $("#contact"),
-		headerHeight = $header.outerHeight(true),
+		headerHeight = ($window.width() > 768) ? 52 : 46;
 		links = ["#about", "#works", "#contact"],
 		configScrollreveal = {
 			init: false,
@@ -422,19 +422,26 @@
 				time = 0;
 
 			// Scroll jusqu'au haut de la page
-			if($("body").scrollTop() != 0){
-		 		Portfolio.scrollTo("body", 500);
-		 		time = 500;
+			if($("body").scrollTop() !== 0) {
+				time = 400;
+		 		Portfolio.scrollTo("body", time);
 		 	}
 
 			// Page single-work déjà affichée, on la cache, on récupère les informations pour le projet sélectionné
 			if($singleWork.is(":visible")){
 
-		 		$singleWork.velocity({"scale":0.95, "opacity":0}, {duration : 400, delay : 300, easing :"ease", complete : function(){
-			 			$(this).velocity({"scale":1}, 0);
-			 			Portfolio.updateWorkPage(self.works[workId-1]);
-		 			}
-		 		});
+				setTimeout( function() {
+
+					$singleWork
+					.css('transform', 'scale(1)')
+					.velocity({"scale":0.95, "opacity":0}, {duration : 200, easing :"ease", complete : function() {
+				 			$(this).velocity({"scale":1}, 0);
+				 			Portfolio.updateWorkPage(self.works[workId-1]);
+			 			}
+			 		});
+
+				}, time);
+
 
 		 	// Sinon si on est sur la page des projets
 		 	}else{
@@ -619,9 +626,11 @@
 				window.scrollReveal.init(true);
 			}
 
-			$("#single-work")
-			.css({"display" : "block"})
-			.velocity({scale:1, opacity:1}, 400, "easeInSine");
+			$singleWork
+				.css({"display" : "block"})
+				.velocity({scale:1, opacity:1}, 400, "easeInSine", function() {
+					$(this).css({'transform': 'none', '-webkit-transform': 'none'});
+				});
 
 		},
 
@@ -629,10 +638,12 @@
 
 			window.location.hash="#works";
 
-			$singleWork.velocity({scale :0.99, opacity:0}, 200, "ease", function(){
-					$singleWork.css("display", "none");
-					$header.css("display", "block").velocity({top:0, opacity:1}, 300);
-					$works.css("display", "block").velocity({opacity:1}, 300);
+			$singleWork
+				.css('transform', 'scale(1)')
+				.velocity({scale: 0.99, opacity:0}, 200, "ease", function() {
+					$(this).css("display", "none");
+					$header.css("display", "block").velocity({top: 0, opacity:1}, {duration:300, delay:200});
+					$works.css("display", "block").velocity({opacity:1}, {duration:300, delay:200});
 			});
 
 		},

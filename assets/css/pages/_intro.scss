@@ -8,10 +8,8 @@
 	display: block;
 
 	&__picture {
-	 background-image: url(../img/ameziane.jpg);
-	 background-size: 100% 100%;
-	 margin: 30px auto 0;
-		 border: solid $color--turquoise;
+	 margin-top: 30px;
+	 border: solid $color--turquoise;
 	 height: 120px;
 	 width: 120px;
 	 border-radius: 60px;
@@ -60,11 +58,6 @@
 	&__cta {
 		 display: none;
 		 opacity: 0;
-		 font-size: 1.1em;
-		 font-weight: 400;
-		 color: #000;
-		 width: 100px;
-		 height: 80px;
 		 margin-top: 60px;
 		 transition: color .3s ease;
 

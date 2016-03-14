@@ -55,14 +55,14 @@
 
 	<!-- Start Introduction -->
 	<section class="intro">
-		<div class="intro__picture"></div>
+		<img class="intro__picture" src="ameziane.jpg" role="presentation" alt=""/>
 		<p class="intro__text">
 			Hi! I'm <span class="intro__name">Améziane Allioui</span>,<br/>front-end developer junior in Paris<br/> and student at <a href="http://www.hetic.net" target="_blank" class="intro__link u-c-green">Hetic</a> in Paris.<br/>
 			Welcome to my portfolio!
 		</p>
 		<a class="intro__cta go-to">
-			Take a look...
-			<i class="arrow icon-arrow-down" role="img" aria-label="See the porfolio"></i>
+			<p class="go-to__legend">Take a look...</p>
+			<i class="arrow arrow--down" role="img" aria-label="See the porfolio"></i>
 		</a>
 	</section>
 	<!-- End Introduction -->
@@ -72,10 +72,10 @@
 		<a class="header__name" href="http://ameziane-allioui.com" title="Go back to start">Améziane Allioui</a>
 		<button class="header__toggle"><span></span></button>
 		<nav role="nav" class="nav">
-			<ul class="nav__list">
-				<li class="nav__item"><a class="nav__link" href="#works">My works</a></li>
-				<li class="nav__item"><a class="nav__link" href="#about">About</a></li>
-				<li class="nav__item"><a class="nav__link" href="#contact">Contact</a></li>
+			<ul class="nav__list" role="menu">
+				<li class="nav__item" role="presentation"><a class="nav__link" href="#works" title="Go to the page My Works">My works</a></li>
+				<li class="nav__item" role="presentation"><a class="nav__link" href="#about" title="Go to the page About">About</a></li>
+				<li class="nav__item" role="presentation"><a class="nav__link" href="#contact" title="Go to the page Contact">Contact</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -83,10 +83,12 @@
 
 	<!-- Start Works -->
 	<section id="works" class="works">
-		
-		<h1 class="works__title">My works</h1>
-		<div id="list-works" class="u-contentWrapper"></div>
-		
+
+		<div class="u-contentWrapper">
+			<h1 aria-level="1" class="works__title">My works</h1>
+			<div id="list-works"></div>
+		</div>
+
 	</section>
 	<!-- Works End -->
 
@@ -97,7 +99,7 @@
 
 		<!-- Link to previous work -->
 		<a class="single__link single__link--prev" id="previous-work">
-			<span class="single__arrow arrow" id="icon-arrow-left"></span>
+			<span class="single__arrow arrow arrow--left" id="icon-arrow-left"></span>
 			<span class="single__legend-mobile">Previous work</span>
 			<p class="single__legend-arrow">Previous work :<br/>
 				<span class="single__link-label"></span>
@@ -106,7 +108,7 @@
 
 		<!-- Link to next work -->
 		<a class="single__link single__link--next"  id="next-work">
-			<span class="single__arrow arrow" id="icon-arrow-right"></span>
+			<span class="single__arrow arrow arrow--right" id="icon-arrow-right"></span>
 			<span class="single__legend-mobile">Next work</span>
 			<p class="single__legend-arrow">Next work :<br/>
 				<span class="single__link-label"></span>
@@ -115,7 +117,7 @@
 
 		<!-- Start Informations on the work-->
 		<div class="single__intro" id="wrapper-work-info">
-			<h1 class="single__title"></h1>
+			<h1 aria-level="1" class="single__title"></h1>
 			<div class="single__url" id="url"><a class="u-c-turquoise"></a></div>
 
 			<p class="single__info">Role : <span id="role" class="u-c-turquoise"></span></p>
@@ -126,17 +128,17 @@
 			<p id="presentation" class="single__presentation"></p>
 
 			<a id="scroll-to-pictures" class="single__scroll go-to" href="#wrapper-pictures">
-				Scroll to see pictures of the project !
-				<span class="arrow icon-arrow-down" id="scroll-arrow"></span>
+				<p class="go-to__legend">Scroll to see pictures of the project !</p>
+				<span class="arrow arrow--down arrow-animated"></span>
 			</a>
 
 			<div id="wrapper-pictures" class="single__pictures">
 
 			</div>
 
-			<a class="go-to go-to-top" href="#wrapper-work-info">
-				<span class="arrow" id="icon-arrow-top" ></span>
-				<span class="legend-go-to-top">Go to top</span>
+			<a class="go-to go-to--up" href="#wrapper-work-info">
+				<span class="go-to__arrow arrow arrow--up" id="icon-arrow-top" ></span>
+				<span class="go-to__legend">Go to top</span>
 			</a>
 		</div>
 		<!-- Informations on the work End-->
@@ -146,10 +148,10 @@
 	<!-- Start About -->
 	<section id="about" class="about">
 
-		<div class="u-contentWrapper u-contentWrapper--about u-ta-justify">
+		<div class="u-contentWrapper u-contentWrapper--about">
 
-			<h1>About me</h1>
-			<h2 class="about__title">Who I am ?</h2>
+			<h1 aria-level="1">About me</h1>
+			<h2 aria-level="2" class="about__title">Who I am ?</h2>
 
 			<div class="about__text">
 				<p class="about__paragraph">I'm a 23 years old junior front-end developer based in Paris. My goal is to develop later accessible websites and applications for people with or without disabilities.<p>
@@ -159,9 +161,9 @@
 
 			<!-- Start Skills -->
 
-			<h2 class="about__title about__title--skills">What I can do</h2>
+			<h2 aria-level="2" class="about__title about__title--skills">What I can do</h2>
 
-			<h3 class="about__subtitle">Front-end</h3>
+			<h3 aria-level="3" class="about__subtitle">Front-end</h3>
 
 			<div class="skill" data-percent="80">
 				<div class="skill__title">HTML5</div>
@@ -219,7 +221,7 @@
 				</div>
 			</div>
 
-			<h3 class="about__subtitle">Back-end</h3>
+			<h3 aria-level="3" class="about__subtitle">Back-end</h3>
 
 			<div class="skill" data-percent="70">
 				<div class="skill__title">WordPress</div>
@@ -253,7 +255,7 @@
 				</div>
 			</div>
 
-			<h3 class="about__subtitle">Others</h3>
+			<h3 aria-level="3" class="about__subtitle">Others</h3>
 
 			<div class="skill" data-percent="60">
 				<div class="skill__title">Git/Github</div>
@@ -291,9 +293,9 @@
 
 		<!-- skills End -->
 
-		<a class="go-to go-to--about go-to-top" href="#about">
-			<span class="arrow" id="icon-arrow-top" ></span>
-			<span class="legend-go-to-top">Go to top</span>
+		<a class="go-to go-to--about go-to--up" href="#about">
+			<span class="go-to__arrow arrow arrow--up" id="icon-arrow-top" ></span>
+			<span class="go-to__legend">Go to top</span>
 		</a>
 
 	</section>
@@ -305,9 +307,9 @@
 
 		<div class="u-contentWrapper u-contentWrapper--contact u-ta-center">
 
-			<h1 class="u-c-turquoise">Looking for an internship for 2016!</h1>
+			<h1 aria-level="1" class="u-c-turquoise">Looking for an internship for 2016!</h1>
 
-			<p>Hey! Did I also tell you I'm looking for an internship from July to December '16? If you're interested in my profile, please <a href="http://ameziane-allioui.com/CV_Améziane_Allioui.pdf" class="contact__cv u-c-turquoise" target="_blank" onclick="ga('send','event','Cv','click','CV_Allioui_Ameziane.pdf');">have a look at my CV</a>
+			<p>Hey! Did I also tell you I'm looking for an internship from July to December '16? If you're interested in my profile, please <a href="http://ameziane-allioui.com/CV_Améziane_Allioui.pdf" class="contact__cv u-c-turquoise" target="_blank" onclick="ga('send','event','Cv','click','CV_Allioui_Ameziane.pdf');" title="Open Resume in a new window">have a look at my CV</a>
 			and don't hesitate to contact me!</p>
 
 			<!-- Start Form -->
@@ -316,15 +318,18 @@
 				<div class="form__notif"></div>
 				<div class="form__field">
 					<label class="form__label" for="form-name">Name*</label>
-					<input class="form__text" type="text" name="first-name" id="form-name" />
+					<input class="form__text" type="text" name="first-name" id="form-name" ariarequired="
+true"/>
 				</div>
 				<div class="form__field">
 					<label class="form__label" for="form-email">Email*</label>
-					<input class="form__text" type="email" name="email"  id="form-email" />
+					<input class="form__text" type="email" name="email" id="form-email" ariarequired="
+true"/>
 				</div>
 				<div class="form__field">
 					<label class="form__label" id="label-message" for="form-message">Message*</label>
-					<textarea class="form__textarea" name="message" id="form-message"></textarea>
+					<textarea class="form__textarea" name="message" id="form-message" ariarequired="
+true"></textarea>
 				</div>
 				<input class="form__submit" type="submit" value="SEND" />
 			</form>
@@ -332,10 +337,10 @@
 
 			<!-- Start External Links -->
 			<div class="contact__links">
-				<a href="https://twitter.com/amezianeallioui" target="_blank">
+				<a href="https://twitter.com/amezianeallioui" target="_blank" title="See my Twitter page">
 					<i class="contact__link contact__link--twitter fa fa-twitter" title="Follow me on Twitter !"></i>
 				</a>
-				<a href="https://www.linkedin.com/in/amezianeallioui" target="_blank" title="Go to my Linkedin profile">
+				<a href="https://www.linkedin.com/in/amezianeallioui" target="_blank" title="See my Linkedin profile">
 					<i class="contact__link contact__link--linkedin fa fa-linkedin"></i>
 				</a>
 				<a href="mailto:ameziane.allioui@gmail.com" target="_blank" title="Send me a mail !">

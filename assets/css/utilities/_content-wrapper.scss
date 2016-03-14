@@ -3,7 +3,7 @@
    ================================================== */
 
 .u-contentWrapper {
-  margin: 40px auto 50px;
+  margin: 0 auto 50px;
   max-width: 960px;
 
   &--contact {
@@ -16,8 +16,12 @@
   &--about {
     max-width: 680px;
 		padding-bottom: 50px;
+
+    @include tablet {
+      max-width: 500px;
+    }
 	}
-  
+
   @include tablet {
     padding: 0 10px;
   }

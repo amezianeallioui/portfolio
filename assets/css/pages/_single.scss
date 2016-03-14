@@ -1,11 +1,10 @@
 .single {
-	position: absolute;
+	position: relative;
 	top:0;
 	z-index: 10000;
 	width: 100%;
 	height: auto;
 	background-color: #fff;
-	transform: scale(1);
 
 	&__close {
 		display: block;
@@ -49,7 +48,7 @@
 		position: fixed;
 		max-width: 20%;
 		display: block;
-		top: 150px;
+		top: calc(50% - 10px);
 
 		&:hover .single__arrow{
 			transition: all 0.2s linear;
@@ -66,7 +65,6 @@
 			margin-left: 20px;
 
 			.single__arrow {
-			 background-position: 0 38px;
 			 float: left;
 			 left: 40px;
 			}
@@ -87,7 +85,6 @@
 			right: 0;
 
 			.single__arrow {
-				background-position: 0 19px;
 				float: right;
 				right: 40px;
 			}
@@ -108,17 +105,11 @@
 	}
 
 	&__arrow {
-		display: inline-block;
-		width:26px;
-		height:19px;
-		position: absolute;
 		top: 10px;
 		z-index: 9996;
-		cursor: pointer;
-		transition: all 0.2s ease 0.3s;
 	}
 
-	&__legend-arrow{
+	&__legend-arrow {
 		display: inline-block;
 		width: 150px;
 		position: absolute;
@@ -177,7 +168,6 @@
 
 	&__presentation {
 		max-width: 570px;
-		text-align: justify;
 		margin: 50px auto 0;
 		font-size: .95em;
 	}
@@ -196,25 +186,23 @@
 
 @include tablet {
  	.single {
-		margin-top:15px;
-
-		&__close{
+		&__close {
   		width: 50px;
   		height: 50px;
   		display: inline-block;
   		position: absolute;
   		left: calc(50% - 25px);
   		right: initial;
-  		top: -6px;
   	}
 
 		&__link {
-			top: 0;
+			top: 16px;
 			display: inline-block;
-			width: calc(50% - 75px);
+			width: calc(50% - 25px);
+			position: absolute;
 
 			&--prev {
-				margin-left: 30px;
+				margin-left: 15px;
 
 				.single__arrow {
 					left: 0;
@@ -227,18 +215,22 @@
 			}
 
 			&--next {
-				margin-right: 30px;
+				margin-right: 15px;
+				padding-right: 0;
 		    right: 0;
 		    text-align: right;
 
 				.single__arrow {
 					right: 0;
+					position: absolute;
 				}
 
 				.single__legend-mobile {
 		   		text-align: right;
 		      padding-right: 0;
 		  		width: 50px;
+					position: absolute;
+    			right: 36px;
 		   	}
 			}
 		}
@@ -258,11 +250,11 @@
 		}
 
 		&__intro {
-			width: 90%;
+			width: 100%;
 		}
 
 		&__title {
-			margin-top: 40px;
+			margin-top: 60px;
 		}
 
 		&__scroll {
@@ -287,10 +279,6 @@
 			margin-top: 30px;
 			font-size: 1em;
 		}
-
-		&__scroll {
-  		margin-bottom: 90px;
-  	}
 	}
 }
 

@@ -3,6 +3,10 @@
 	  	padding: 40px 0;
 	  	font-size: 1.7em;
 
+			&:first-of-type {
+				padding-top: 0;
+			}
+
 			&--skills {
 				padding-bottom: 10px;
 
